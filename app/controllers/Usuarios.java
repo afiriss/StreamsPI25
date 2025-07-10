@@ -30,4 +30,15 @@ public class Usuarios extends Controller{
 		listar();
 	}
 	
+	public static void remover(long id) {
+		Usuario usuario = Usuario.findById(id);
+		usuario.delete();
+		listar();
+	}
+	
+	public static void detalhar(Usuario usuario) {
+		render(usuario);
+		detalhar(usuario);
+	}
+	
 }
