@@ -13,28 +13,20 @@ public class Usuarios extends Controller{
 		render();
 	}
 
-	public static void listar(String termo) {
-		List<Usuario> usuarios = null;
-		if (termo == null) {
-			usuarios = Usuario.findAll();	
-		} else {
-			usuarios = Usuario.find("lower(nome) like ?1 "
-					+ "or lower(email) like ?1",
-					"%" + termo.toLowerCase() + "%").fetch();
-		}
-		render(usuarios, termo);
+	public static void listar() {
+		List<Usuario> usuarios = Usuario.findAll();
+		render(usuarios);
 	}
 	
-	public static void detalhar(Usuario usuario) {
-		render(usuario);
-		detalhar(usuario);
-	}
+//	public static void detalhar(Usuario usuario) {
+	//	render(usuario);
+	//	detalhar(usuario);
+	//}
 	
 	public static void editar(Long id) {
 		Usuario u = Usuario.findById(id);
-		List<Filme> filmes = Filme.findAll();
 		
-		renderTemplate("Usuario/form.html", filmes);
+		renderTemplate("Usuarios/form.html", u);
 	}
 	
 	public static void salvar(Usuario u) {
@@ -48,13 +40,13 @@ public class Usuarios extends Controller{
 			u.telefone = u.telefone;
 		}
 		u.save();
-		detalhar(u);
+		listar();
 	}
 	
 	public static void remover(long id) {
 		Usuario usuario = Usuario.findById(id);
 		usuario.delete();
-		listar(null);
+		listar();
 	}
 	
 	
