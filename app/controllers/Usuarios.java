@@ -25,9 +25,9 @@ public class Usuarios extends Controller{
 	
 	public static void editar(Long id) {
 		Usuario u = Usuario.findById(id);
-		List<Filme> departamentos = Filme.findAll();
+		List<Filme> filmes = Filme.findAll();
 		
-		renderTemplate("Usuario/form.html", u, departamentos);
+		renderTemplate("Usuario/form.html", filmes);
 	}
 	
 	public static void salvar(Usuario u) {
