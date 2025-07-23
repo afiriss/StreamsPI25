@@ -26,6 +26,7 @@ public class Usuarios extends Controller{
 		if(u.telefone != null) {
 			u.telefone = u.telefone;
 		}
+		
 		u.save();
 		listar();
 	}
@@ -36,9 +37,10 @@ public class Usuarios extends Controller{
 		listar();
 	}
 	
-	public static void detalhar(Usuario usuario) {
-		render(usuario);
-		detalhar(usuario);
-	}
+	// deixei comentado para testar a variavel telefone
+	//public static void detalhar(Usuario usuario) {
+	//	render(usuario);
+	//	detalhar(usuario);
+	//}
 	
 }
