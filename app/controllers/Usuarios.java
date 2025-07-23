@@ -2,6 +2,8 @@ package controllers;
 
 import java.util.List;
 
+import models.Departamento;
+import models.Pessoa;
 import models.Usuario;
 import play.mvc.Controller;
 
@@ -14,6 +16,18 @@ public class Usuarios extends Controller{
 	public static void listar() {
 		List<Usuario> usuarios = Usuario.findAll();
 		render(usuarios);
+	}
+	
+	public static void detalhar(Usuario usuario) {
+		render(usuario);
+		detalhar(usuario);
+	}
+	
+	public static void editar(Long id) {
+		Usuario usuario = usuario.findById(id);
+		List<Departamento> departamentos = Departamento.findAll();
+		
+		renderTemplate("Pessoas/form.html", p, departamentos);
 	}
 	
 	public static void salvar(Usuario u) {
@@ -36,9 +50,5 @@ public class Usuarios extends Controller{
 		listar();
 	}
 	
-	public static void detalhar(Usuario usuario) {
-		render(usuario);
-		detalhar(usuario);
-	}
 	
 }
