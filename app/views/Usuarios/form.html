@@ -1,4 +1,26 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{welcome /}
+<form action="@{Usuarios.salvar}">
+
+<h1>Cadastro de Usuario:</h1>
+
+<hr> 
+
+<br />
+<label>Nome:</label>
+<input type="text" name="u.nome">
+<br />
+
+<br />
+<label>E-mail:</label>
+<input type="text" name="u.email">
+<br />
+
+<br />
+<label>Telefone:</label>
+<input type="text" name="u.telefone">
+<br />
+
+<input type="submit">
+</form>
