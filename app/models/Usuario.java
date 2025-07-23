@@ -9,5 +9,4 @@ public class Usuario extends Model{
 	public String nome;
 	public String email;
 	public Integer telefone;
-
 }

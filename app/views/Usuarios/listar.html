@@ -1,0 +1,22 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<h1>Cadastro de Usuario:</h1>
+
+<hr> 
+
+<ul>
+#{list items: usuarios, as:'u'}
+
+<li> | ${u.nome} | ${u.email} | ${u.telefone} |
+<a href="@{Usuarios.remover(u.id)}"> Remover</a>
+</li>
+
+#{/list}
+#{else}
+<li>Nenhuma Pessoa Cadastrada</li>
+#{/else}
+
+</ul>
+
+<a href="@{Pessoas.form}">Cadastrar Novo</a>
