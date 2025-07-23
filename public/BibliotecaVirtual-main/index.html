@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biblioteca</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+
+<body>
+
+  <main class="principal">
+    <nav class="navbar navbar-light" style="background-color: black;">
+      <a href="login.html" class="navbar-brand">
+        <img class="log" src="logo.png" width="250px" height="50px" />
+        <button type="button" class="btn btn-outline-light">Login</button>
+      </a>
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+        <a href="compra.html" id="carr"><img width="48" height="50"
+            src="https://img.icons8.com/material-sharp/48/FFFFFF/shopping-cart.png" alt="carrinho" /></a>
+      </form>
+    </nav>
+
+    <ul class="nav justify-content-center" id="nav">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+          aria-expanded="false">Categorias</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">eBooks</a>
+          <a class="dropdown-item" href="#Biografias">Biografias</a>
+          <a class="dropdown-item" href="#Escritores">Escritores Brasileiros</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">outros...</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#Literatura">Literatura Brasileira</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="#Biografias">Biografias</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#Ficção">Ficção</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">História</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Novidades</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Mais Vendidos</a>
+      </li>
+    </ul>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
+      style="width: 100%; margin: 0 auto;">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="https://lasca.studio/photos/mestres-da-literatura/3-Castro-Alves-min.jpg"
+            alt="Primeiro Slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="https://lasca.studio/photos/mestres-da-literatura/2-Machado-de-Assis-min.jpg"
+            alt="Segundo Slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="https://lasca.studio/photos/mestres-da-literatura/6-Ariano-Suassuna-min.jpg"
+            alt="Terceiro Slide">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Anterior</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Próximo</span>
+      </a>
+    </div>
+
+    <ul class="nav nav2 justify-content-center" id="nav2">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+          aria-expanded="false">Categorias</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#Literatura">Literatura Brasileira</a>
+          <a class="dropdown-item" href="#Biografias">Biografias</a>
+          <a class="dropdown-item" href="#Ficção">Ficção</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">outros...</a>
+        </div>
+      </li>
+    </ul>
+
+    <br>
+    <hr><br>
+
+    <h1 id="Literatura">LITERATURA BRASILEIRA</h1><br>
+    <div class="row">
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top"
+            src="https://livrariacultura.vteximg.com.br/arquivos/ids/148199421-300-300/2112281834.jpg?v=638144333193470000"
+            alt="Imagem de capa do card">
+          <div class="card-body">
+            <h5 class="card-title">A hora da estrela</h5>
+            <p class="card-text">R$ 34,90</p>
+            <a href="compra.html" class="btn btn-primary" id="btn-comprar">COMPRAR</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top"
+            src="https://livrariacultura.vteximg.com.br/arquivos/ids/114659024-300-300/42887676.jpg?v=637969366160330000"
+            alt="Imagem de capa do card">
+          <div class="card-body">
+            <h5 class="card-title">Olhos D'água</h5>
+            <p class="card-text">R$ 32,00</p>
+            <a href="compra.html" class="btn btn-primary" id="btn-comprar">COMPRAR</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top"
+            src="https://livrariacultura.vteximg.com.br/arquivos/ids/148185312-300-300/46786250.jpg?v=638144309536330000"
+            alt="Imagem de capa do card">
+          <div class="card-body">
+            <h5 class="card-title">Textos cruéis demais...</h5>
+            <p class="card-text">R$ 59,90</p>
+            <a href="compra.html" class="btn btn-primary" id="btn-comprar">COMPRAR</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="container"><a href="literatura.html" class="btn btn-primary" id="btn-comprar"
+        style="margin-top: 20px; ">VER MAIS</a></div>
+
+    <hr>
+    <h1 id="Biografias">BIOGRAFIAS</h1><br>
+    <div class="row">
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top"
+            src="https://livrariacultura.vteximg.com.br/arquivos/ids/148199421-300-300/2112281834.jpg?v=638144333193470000"
+            alt="Imagem de capa do card">
+          <div class="card-body">
+            <h5 class="card-title">Em busca de mim</h5>
+            <p class="card-text">R$ 49,90</p>
+            <a href="compra.html" class="btn btn-primary" id="btn-comprar">COMPRAR</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top"
+            src="https://livrariacultura.vteximg.com.br/arquivos/ids/149429713-300-300/2112321629.jpg?v=638155235418270000"
+            alt="Imagem de capa do card">
+          <div class="card-body">
+            <h5 class="card-title">Quarto de despejo</h5>
+            <p class="card-text">R$ 92,00</p>
+            <a href="compra.html" class="btn btn-primary" id="btn-comprar">COMPRAR</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top"
+            src="https://livrariacultura.vteximg.com.br/arquivos/ids/148174320-300-300/29803045.jpg?v=638144289877100000"
+            alt="Imagem de capa do card">
+          <div class="card-body">
+            <h5 class="card-title">A outra face</h5>
+            <p class="card-text">R$ 91,00</p>
+            <a href="compra.html" class="btn btn-primary" id="btn-comprar">COMPRAR</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container"><a href="biografias.html" class="btn btn-primary" id="btn-comprar"
+        style="margin-top: 20px;">VER MAIS</a></div>
+    <hr>
+    <h1 id="Ficção">FICÇÃO</h1><br>
+    <div class="row">
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top"
+            src="https://livrariacultura.vteximg.com.br/arquivos/ids/156523996-300-300/2112364084.jpg?v=638658657718600000"
+            alt="Imagem de capa do card">
+          <div class="card-body">
+            <h5 class="card-title">Warbreaker</h5>
+            <p class="card-text">R$ 159,90</p>
+            <a href="compra.html" class="btn btn-primary" id="btn-comprar">COMPRAR</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top"
+            src="https://livrariacultura.vteximg.com.br/arquivos/ids/156523857-300-300/2112363933.jpg?v=638655201369370000"
+            alt="Imagem de capa do card">
+          <div class="card-body">
+            <h5 class="card-title">A melodia da água</h5>
+            <p class="card-text">R$ 59,90</p>
+            <a href="compra.html" class="btn btn-primary" id="btn-comprar">COMPRAR</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top"
+            src="https://livrariacultura.vteximg.com.br/arquivos/ids/156523455-300-300/2112363469.jpg?v=638648292981770000"
+            alt="Imagem de capa do card">
+          <div class="card-body">
+            <h5 class="card-title">História do ladrão..</h5>
+            <p class="card-text">R$ 99,90</p>
+            <a href="compra.html" class="btn btn-primary" id="btn-comprar">COMPRAR</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container vm"><a href="ficcao.html" class="btn btn-primary" id="btn-comprar"
+        style="margin-top: 20px; ">VER MAIS</a></div>
+
+    <hr>
+    <h1 id="Escritores">Grandes Escritores Brasileiros</h1><br>
+    <div class="container esc" style="text-align: center;">
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://s5.static.brasilescola.uol.com.br/be/2023/05/goncalves-dias.jpg" alt="..."
+              class="rounded-circle">
+            <img src="https://s2.static.brasilescola.uol.com.br/be/2023/05/alvares-azevedo.jpg" alt="..."
+              class="rounded-circle">
+            <img src="https://s2.static.brasilescola.uol.com.br/be/2023/05/bernardo-guimaraes.jpg" alt="..."
+              class="rounded-circle">
+          </div>
+          <div class="carousel-item">
+            <img src="https://s1.static.brasilescola.uol.com.br/be/2023/05/machado-assis.jpg" alt="..."
+              class="rounded-circle">
+            <img src="https://s1.static.brasilescola.uol.com.br/be/2023/05/aluisio-azevedo.jpg" alt="..."
+              class="rounded-circle">
+            <img src="https://s4.static.brasilescola.uol.com.br/be/2023/05/cora-coralina.jpg" alt="..."
+              class="rounded-circle">
+          </div>
+          <div class="carousel-item">
+            <img src="https://s5.static.brasilescola.uol.com.br/be/2023/05/nelson-rodrigues.jpg" alt="..."
+              class="rounded-circle">
+            <img src="https://s3.static.brasilescola.uol.com.br/be/2023/05/manoel-barros.jpg" alt="..."
+              class="rounded-circle">
+            <img src="https://s2.static.brasilescola.uol.com.br/be/2023/05/bernardo-guimaraes.jpg" alt="..."
+              class="rounded-circle">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" style="background-color: rgb(0, 0, 0); border-radius: 360px;"
+            aria-hidden="true"></span>
+          <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" style="background-color: rgb(0, 0, 0); border-radius: 360px;"
+            aria-hidden="true"></span>
+          <span class="sr-only">Próximo</span>
+        </a>
+      </div>
+      <a href="#" class="btn btn-primary" id="btn-comprar">VOLTAR AO INÍCIO</a>
+    </div>
+  </main>
+  <br><br>
+  <!-- Footer -->
+  <footer class="text-white py-4">
+    <div class="container text-center">
+      <p>&copy; 2025 SystemBOOK. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</body>
+
+</html>

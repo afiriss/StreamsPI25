@@ -1,0 +1,67 @@
+/*Estilo geral*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  h1{
+    font-family: 'Times New Roman', Times, serif;
+  }
+  body {
+    background-color: white;
+    height: 100%;
+    display: block;
+  }
+  #btn-comprar{
+    text-decoration: none;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #00a808;
+    color: #ffffff;
+    padding: 5px;
+    width: 100%;
+  }
+  #btn-comprar a{
+    color: #ffffff;
+    font-size: 15px;
+  }
+ #frt:hover, #btn-comprar:hover, .card-img-top:hover{
+    background-color: #036908;
+    color: #ffffff;
+  }
+  .container{
+    margin: 0 auto;
+    padding: 50px;
+  }
+  #carr:hover{
+    background-color: #00a808;
+  }
+  #frt{
+    text-decoration: none;
+    font-size: 15px;
+    border: 1px solid green;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 5px;
+  }
+  @media (max-width: 600px) {
+    .log{
+      width: 150px;
+      height: 50px;
+    }
+    ul{
+      margin: 0 auto;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 0px;
+    }
+    li{
+      padding: 1px 0px;
+      border-radius: 5px;
+    }
+  }

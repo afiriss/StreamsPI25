@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biblioteca</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="compra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+
+<body>
+
+  <main class="principal">
+    <nav class="navbar navbar-light" style="background-color: black;">
+      <a href="index.html" class="navbar-brand">
+        <img class="log" src="logo.png" width="250px" height="50px" />
+      </a>
+      <form class="form-inline">
+        <a href="compra.html" id="carr"><img width="48" height="50"
+            src="https://img.icons8.com/material-sharp/48/FFFFFF/shopping-cart.png" alt="carrinho" /></a>
+      </form>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="container">
+      <h1>Realizar Compra</h1>
+      <div class="row">
+        <!-- Formulário de Pagamento e Envio -->
+        <div class="col">
+          <h4 class="mb-3">Informações de Envio</h4>
+          <form>
+            <!-- Nome Completo -->
+            <div class="mb-3">
+              <label for="nome" class="form-label">Nome Completo</label>
+              <input type="text" class="form-control" id="nome" placeholder="Digite seu nome" required>
+            </div>
+            <div class="mb-3">
+              <label for="endereco" class="form-label">Endereço</label>
+              <input type="text" class="form-control" id="endereco" placeholder="Rua, número, bairro" required>
+            </div>
+
+            <!-- Cidade e Estado -->
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="cidade" class="form-label">Estado</label>
+                <input type="text" class="form-control" id="estado" required placeholder="sua estado">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="cidade" class="form-label">Cidade</label>
+                <input type="text" class="form-control" id="cidade" required placeholder="sua cidade">
+              </div>
+            </div>
+            <br>
+            <h4 class="mb-3">Informações do pedido</h4>
+            <form>
+              <div class="mb-3">
+                <label for="nome" class="form-label">Título do livro</label>
+                <input type="text" class="form-control" id="nome" placeholder="Digite o título do livro" required>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="cidade" class="form-label">Valor</label>
+                  <input type="text" class="form-control" id="estado" required placeholder="valor do pedido">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="cidade" class="form-label">Categoria</label>
+                  <input type="text" class="form-control" id="cidade" required placeholder="categoria do livro">
+                </div>
+              </div>
+              <br>
+              <!-- Informações de Pagamento -->
+              <h4 class="mb-3">Informações de Pagamento</h4>
+              <div class="mb-3">
+                <label for="cartao" class="form-label">Número do Cartão</label>
+                <input type="text" class="form-control" id="cartao" placeholder="1234 5678 9012 3456" required>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="vencimento" class="form-label">Data de Vencimento</label>
+                  <input type="text" class="form-control" id="vencimento" placeholder="MM/AA" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="cvv" class="form-label">CVV</label>
+                  <input type="text" class="form-control" id="cvv" placeholder="123" required>
+                </div>
+              </div>
+              <br>
+              <!--Calcular Frete-->
+              <h4 class="mb-3">Calcular Frete</h4>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="vencimento" class="form-label">Valor do livro:</label>
+                  <input type="number" class="form-control" name="txtValor" id="txtValor" placeholder="R$ 0,00" />
+                  <input type="button" value="Calcular" id="frt" onclick="calcular()" />
+
+                  <div id="res">
+                    <script>
+
+                      function calcular() {
+                        var txtv = document.querySelector("input#txtValor");
+                        var res = document.querySelector("div#res");
+                        var vel = Number(txtv.value);
+
+                        if (vel > 60) {
+                          res.innerHTML +=
+                            "<p>Valor do frete: R$ 0,00</p>";
+                        } else {
+                          res.innerHTML += "<p>Valor do frete: R$ 15,00</p>";
+                        }
+
+                      }
+                    </script>
+                    </div>
+
+                </div>
+
+
+              </div>
+
+              <!-- Botão de Finalizar -->
+              <button type="button" class="btn btn-primary" id="btn-comprar" onclick="Mensagem()">Finalizar
+                Compra</button>
+              <button type="reset" class="btn" id="btn-comprar"
+                style="background-color: rgb(255, 255, 255); color: black; border: 1px solid rgba(0, 0, 0, 0.274); margin-top: 2px;">Cancelar</button>
+              <!-- Mensagem de sucesso -->
+              <div id="mensagem" class="alert alert-success mt-3 d-none">
+                Parabéns! Compra realizada com sucesso.
+              </div>
+            </form>
+        </div>
+
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  </main>
+  <br><br>
+  <!-- Footer -->
+  <footer class="text-white py-4">
+    <div class="container text-center">
+      <p style="color: rgb(93, 94, 93);">&copy; 2025 SystemBOOK. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    function Mensagem() {
+      document.getElementById("mensagem").classList.remove("d-none"); // Exibe a mensagem
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</body>
+
+</html>
