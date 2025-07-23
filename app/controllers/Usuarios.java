@@ -2,8 +2,8 @@ package controllers;
 
 import java.util.List;
 
-import models.Departamento;
-import models.Pessoa;
+import models.Filme;
+import models.Usuario;
 import models.Usuario;
 import play.mvc.Controller;
 
@@ -24,10 +24,10 @@ public class Usuarios extends Controller{
 	}
 	
 	public static void editar(Long id) {
-		Usuario usuario = usuario.findById(id);
-		List<Departamento> departamentos = Departamento.findAll();
+		Usuario u = Usuario.findById(id);
+		List<Filme> departamentos = Filme.findAll();
 		
-		renderTemplate("Pessoas/form.html", p, departamentos);
+		renderTemplate("Usuario/form.html", u, departamentos);
 	}
 	
 	public static void salvar(Usuario u) {
