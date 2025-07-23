@@ -1,26 +1,34 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
+#{if u}
+#{set title:'Edição de Usuario' /}
+ #{/if}
+ #{else}
+ #{set titlt:'Cadastra de Usuario' /}
+#{/else}
 <form action="@{Usuarios.salvar}">
 
+<input type="hidden" name="u.id" value="${u?.id}">
 <h1>Cadastro de Usuario:</h1>
 
 <hr> 
 
 <br />
 <label>Nome:</label>
-<input type="text" name="u.nome">
+<input type="text" name="u.nome" value="${u?.nome}">
+
 <br />
 
 <br />
 <label>E-mail:</label>
-<input type="text" name="u.email">
+<input type="text" name="u.email" value="${u?.email}">
 <br />
 
 <br />
 <label>Telefone:</label>
-<input type="text" name="u.telefone">
+<input type="text" name="u.telefone" value="${u?.telefone}">
 <br />
 
-<input type="submit">
+<input type="submit" value="${u ? 'Editar':'Cadastrar'}">
 </form>

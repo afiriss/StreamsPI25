@@ -9,6 +9,7 @@
 #{list items: usuarios, as:'u'}
 
 <li> | ${u.nome} | ${u.email} | ${u.telefone} |
+<a href="@{Usuarios.ediatr(u.id)}"> Editar</a> |
 <a href="@{Usuarios.remover(u.id)}"> Remover</a>
 </li>
 
