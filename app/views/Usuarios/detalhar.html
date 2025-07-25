@@ -1,0 +1,10 @@
+#{extends 'main.html' /}
+#{set title:'Detalhamento' /}
+
+<p>${u.nome}</p>
+<p>${u.email}</p>
+<p>${u.telefone}</p>
+<p>${u.filme}</p>
+
+<a class="btn btn-primary" href="@{Usuarios.form}">Cadastrar novo</a>
+<a class="btn btn-secondary" href="@{Usuarios.listar}">Listagem</a>

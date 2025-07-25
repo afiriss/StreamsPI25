@@ -29,8 +29,10 @@
 
 	<div class="mb-3">
 		<label class="form-label">Filme:</label> <select class="form-select"
-			name="usurio.filme.id"> #{list items:filmes, as:'f'}
-			<option value="${f.id}" ${f.id==u?.filme.id? 'selected' : ''}>
+			name="usurio.filme.id"> 
+			#{list items:filmes, as:'f'}
+			<option value="${f.id}" 
+			${f.id == u?.filme?.id ? 'selected' : ''}>
 						${f.nome}
 				</option>
 			#{/list}
