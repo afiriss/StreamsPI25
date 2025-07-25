@@ -11,7 +11,12 @@ import play.mvc.Controller;
 public class Usuarios extends Controller{
 	
 	public static void form() {
-		render();
+		List<Filme> filmes = Filme.findAll();
+		render(filmes);
+	}
+	
+	public static void detalhar(Usuario usuario) {
+		render(usuario);
 	}
 
 	public static void listar(String termo) {
@@ -30,7 +35,9 @@ public class Usuarios extends Controller{
 	public static void editar(Long id) {
 		Usuario u = Usuario.findById(id);
 		
-		renderTemplate("Usuarios/form.html", u);
+		List <Filme> filmes = Filme.findAll();
+		
+		renderTemplate("Usuarios/form.html", u, filmes);
 	}
 	
 	public static void salvar(Usuario u) {

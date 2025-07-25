@@ -3,6 +3,7 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 
 import play.db.jpa.Model;
 
@@ -20,5 +21,7 @@ public class Usuario extends Model{
 		this.status = Status.ATIVO;
 	}
 	
+	@ManyToOne
+	public Filme filme;
 }
 

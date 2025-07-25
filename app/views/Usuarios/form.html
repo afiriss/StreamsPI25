@@ -9,26 +9,38 @@
 #{/else}
 <form action="@{Usuarios.salvar}">
 
+
 <input type="hidden" name="u.id" value="${u?.id}">
 <h1>Cadastro de Usuario:</h1>
 
 <hr> 
 
-<br />
-<label>Nome:</label>
-<input type="text" name="u.nome" value="${u?.nome}">
+<div class="mb-3">
+<label class="form-label">Nome:</label>
+<input class="form-control" type="text" name="u.nome" value="${u?.nome}">
+</div>
 
-<br />
+<div class="mb-3">
+<label class="form-label">E-mail:</label>
+<input class="form-control" type="text" name="u.email" value="${u?.email}">
+</div>
 
-<br />
-<label>E-mail:</label>
-<input type="text" name="u.email" value="${u?.email}">
-<br />
+<div class="mb-3">
+<label class="form-label">Telefone:</label>
+<input class="form-control" type="text" name="u.telefone" value="${u?.telefone}">
+</div>
 
-<br />
-<label>Telefone:</label>
-<input type="text" name="u.telefone" value="${u?.telefone}">
-<br />
+<div class="mb-3">
+		<label class="form-label">Filme:</label>
+		<select class="form-select" name="usurio.filme.id">
+			#{list items:filmes, as:'f'}
+				<option value="${f.id}" 
+					${f.id == u?.filme.id ? 'selected' : ''}>
+						${f.nome}
+				</option>
+			#{/list}
+		</select>
+	</div>
 
-<input type="submit" value="${u ? 'Editar':'Cadastrar'}">
+<input class="btn btn-primary" type="submit" value="${u ? 'Editar':'Cadastrar'}">
 </form>
