@@ -17,7 +17,9 @@ public class Filme extends Model{
 		this.nome = nome;
 		this.genero = genero;
 	}
+	
+	@Override
 	public String toString() {
-		return nome + " ("+ genero +")";
+		return nome + " ("+ genero + ")";
 	}
 }
