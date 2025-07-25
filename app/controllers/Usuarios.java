@@ -25,10 +25,6 @@ public class Usuarios extends Controller{
 		render(usuarios, termo);
 	}
 	
-//	public static void detalhar(Usuario usuario) {
-	//	render(usuario);
-	//	detalhar(usuario);
-	//}
 	
 	public static void editar(Long id) {
 		Usuario u = Usuario.findById(id);
