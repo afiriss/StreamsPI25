@@ -15,10 +15,6 @@ public class Usuarios extends Controller{
 		render(filmes);
 	}
 	
-	public static void detalhar(Usuario usuario) {
-		render(usuario);
-	}
-
 	public static void listar(String termo) {
 		List<Usuario> usuarios = null;
 		if (termo == null) {
