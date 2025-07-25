@@ -1,46 +1,42 @@
-#{extends 'main.html' /}
-#{set title:'Home' /}
+#{extends 'main.html' /} 
 
-#{if u}
-#{set title:'Edição de Usuario' /}
- #{/if}
- #{else}
- #{set titlt:'Cadastra de Usuario' /}
+#{if u} 
+#{set title:'Edição de Usuario' /} 
+#{/if} 
+#{else} 
+#{set titlt:'Cadastra de Usuario' /} 
 #{/else}
+
 <form action="@{Usuarios.salvar}">
+	<input type="hidden" name="u.id" value="${u?.id}">
+	<h1>Cadastro de Usuario:</h1>
 
+	<div class="mb-3">
+		<label class="form-label">Nome:</label> <input class="form-control"
+			type="text" name="u.nome" value="${u?.nome}">
+	</div>
 
-<input type="hidden" name="u.id" value="${u?.id}">
-<h1>Cadastro de Usuario:</h1>
+	<div class="mb-3">
+		<label class="form-label">E-mail:</label> <input class="form-control"
+			type="text" name="u.email" value="${u?.email}">
+	</div>
 
-<hr> 
+	<div class="mb-3">
+		<label class="form-label">Telefone:</label> <input
+			class="form-control" type="text" name="u.telefone"
+			value="${u?.telefone}">
+	</div>
 
-<div class="mb-3">
-<label class="form-label">Nome:</label>
-<input class="form-control" type="text" name="u.nome" value="${u?.nome}">
-</div>
-
-<div class="mb-3">
-<label class="form-label">E-mail:</label>
-<input class="form-control" type="text" name="u.email" value="${u?.email}">
-</div>
-
-<div class="mb-3">
-<label class="form-label">Telefone:</label>
-<input class="form-control" type="text" name="u.telefone" value="${u?.telefone}">
-</div>
-
-<div class="mb-3">
-		<label class="form-label">Filme:</label>
-		<select class="form-select" name="usurio.filme.id">
-			#{list items:filmes, as:'f'}
-				<option value="${f.id}" 
-					${f.id == u?.filme.id ? 'selected' : ''}>
+	<div class="mb-3">
+		<label class="form-label">Filme:</label> <select class="form-select"
+			name="usurio.filme.id"> #{list items:filmes, as:'f'}
+			<option value="${f.id}" ${f.id==u?.filme.id? 'selected' : ''}>
 						${f.nome}
 				</option>
 			#{/list}
 		</select>
 	</div>
 
-<input class="btn btn-primary" type="submit" value="${u ? 'Editar':'Cadastrar'}">
+	<input class="btn btn-primary" type="submit"
+		value="${u ? 'Editar':'Cadastrar'}">
 </form>

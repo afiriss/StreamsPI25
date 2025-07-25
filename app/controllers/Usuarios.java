@@ -28,6 +28,10 @@ public class Usuarios extends Controller{
 		render(usuarios, termo);
 	}
 	
+	public static void detalhar(Usuario u) {
+		render(u);
+	}
+	
 	public static void editar(Long id) {
 		Usuario u = Usuario.findById(id);
 		
@@ -47,7 +51,7 @@ public class Usuarios extends Controller{
 			u.telefone = u.telefone;
 		}
 		u.save();
-		listar(null);
+		detalhar(u);
 	}
 	
 	public static void remover(long id) {
