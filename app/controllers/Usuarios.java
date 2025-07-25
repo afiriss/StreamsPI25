@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import models.Filme;
+import models.Status;
 import models.Usuario;
 import models.Usuario;
 import play.mvc.Controller;
@@ -16,15 +17,15 @@ public class Usuarios extends Controller{
 	public static void listar(String termo) {
 		List<Usuario> usuarios = null;
 		if (termo == null) {
-			usuarios = Usuario.findAll();
+			usuarios = Usuario.find("status <> ?1", Status.INATIVO).fetch();
 		} else {
-			usuarios = Usuario.find("lower(nome) like ?1 "
-					+ "or lower(email) like ?1",
-					"%" + termo.toLowerCase() + "%").fetch();
+			usuarios = Usuario.find("(lower(nome) like ?1 "
+					+ "or lower(email) like ?1) and status <> ?2",
+					"%" + termo.toLowerCase() + "%",
+					Status.INATIVO).fetch();
 		}
 		render(usuarios, termo);
 	}
-	
 	
 	public static void editar(Long id) {
 		Usuario u = Usuario.findById(id);
@@ -48,7 +49,8 @@ public class Usuarios extends Controller{
 	
 	public static void remover(long id) {
 		Usuario usuario = Usuario.findById(id);
-		usuario.delete();
+		usuario.status = Status.INATIVO;
+		usuario.save();
 		listar(null);
 	}
 	
