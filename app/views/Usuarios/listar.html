@@ -5,6 +5,12 @@
 
 <hr> 
 
+<form action="@{Pessoas.listar}">
+	<label>Buscar por nome ou email:</label>
+	<input type="text" name="termo" value="${termo}" />
+	<input type="submit" />
+</form>
+
 <ul>
 #{list items: usuarios, as:'u'}
 
