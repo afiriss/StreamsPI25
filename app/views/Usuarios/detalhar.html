@@ -1,10 +1,20 @@
-#{extends 'main.html' /}
+#{extends 'main2.html' /}
 #{set title:'Detalhamento' /}
 
-<p>${u.nome}</p>
-<p>${u.email}</p>
-<p>${u.telefone}</p>
-<p>${u.filme}</p>
+<div class="container my-5">
+  <div class="card text-light bg-dark">
+    <div class="card-body">
+      <h3 class="card-title mb-4">Detalhes do Cliente</h3>
 
-<a class="btn btn-primary" href="@{Usuarios.form}">Cadastrar novo</a>
-<a class="btn btn-secondary" href="@{Usuarios.listar}">Listagem</a>
+      <p><strong>Nome:</strong> ${u.nome}</p>
+      <p><strong>Email:</strong> ${u.email}</p>
+      <p><strong>Telefone:</strong> ${u.telefone}</p>
+      <p><strong>Filme favorito:</strong> ${u.filme}</p>
+
+      <div class="mt-4 d-flex gap-3">
+        <a class="btn btn-success" href="@{Usuarios.form}">Cadastrar Novo</a>
+        <a class="btn btn-secondary" href="@{Usuarios.listar}">Voltar à Listagem</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,7 @@ h1{
   form {
     max-width: 800px;
     margin: 40px auto;
-    background-color: rgba(0, 0, 0, 0.6); /* fundo escuro com transparência */
+    background-color: rgba(0, 0, 0, 0.6);
     padding: 30px;
     border-radius: 20px;
     color: #fff;
@@ -15,7 +15,7 @@ h1{
 
   h1 {
     font-size: 32px;
-    color: #e0a04c; /* vermelho vibrante */
+    color: #e0a04c; 
     font-weight: bold;
     margin-bottom: 30px;
     text-shadow: 1px 1px 4px #000;
