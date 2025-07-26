@@ -1,30 +1,59 @@
-#{extends 'main2.html' /}
+#{extends 'main3.html' /}
 #{set title:'Home' /}
 
-<h1>Clientes</h1>
+<!-- Label fora da caixa -->
+<div class="search-label-container">
+  <label for="termo">Buscar por nome ou email:</label>
+</div>
 
-<hr> 
+<!-- Caixa do campo e botão -->
+<div class="search-container">
+  <form action="@{Usuarios.listar}" class="search-form-inside">
+    <input 
+      id="termo"
+      type="text" 
+      name="termo" 
+      value="${termo}" 
+      placeholder="Digite nome ou email" 
+      class="search-input" />
+    <button type="submit" class="search-button">Enviar</button>
+  </form>
+</div>
 
-<form action="@{Usuarios.listar}">
-	<label>Buscar por nome ou email:</label>
-	<input type="text" name="termo" value="${termo}" />
-	<input type="submit" />
-</form>
+<!--- <div class="search-container">
+  <form class="search-form">
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Digite nome ou email"
+    />
+    <button type="submit" class="search-button">Enviar</button>
+  </form>
+</div> --->
 
-<ul>
-#{list items: usuarios, as:'u'}
 
-<li> | ${u.nome} | ${u.email} | ${u.telefone} |
-<a href="@{Usuarios.editar(u.id)}"> Editar</a> |
-<a href="@{Usuarios.remover(u.id)}"> Remover</a> |
-</li>
 
-#{/list}
-#{else}
-<li>Nenhuma Pessoa Cadastrada</li>
-#{/else}
 
-</ul>
 
-<a href="@{Usuarios.form}">Cadastrar Novo</a>
+<!-- Lista de usuários em formato de cards -->
+<div class="user-cards-container">
+  #{list items: usuarios, as:'u'}
+    <div class="user-card">
+      <p><strong>Nome:</strong> ${u.nome}</p>
+      <p><strong>Email:</strong> ${u.email}</p>
+      <p><strong>Telefone:</strong> ${u.telefone}</p>
+      <div class="button-group">
+        <a href="@{Usuarios.editar(u.id)}" class="action-button">Editar</a>
+        <a href="@{Usuarios.remover(u.id)}" class="action-button">Remover</a>
+      </div>
+    </div>
+  #{/list}
+  #{else}
+    <p class="no-users">Nenhuma Pessoa Cadastrada</p>
+  #{/else}
+</div>
 
+<!-- Botão cadastrar -->
+<div style="text-align: center; margin-top: 2rem;">
+  <a href="@{Usuarios.form}" class="action-button">Cadastrar Novo</a>
+</div>
