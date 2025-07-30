@@ -1,12 +1,10 @@
 #{extends 'main3.html' /}
 #{set title:'Home' /}
 
-<!-- Label fora da caixa -->
 <div class="search-label-container">
   <label for="termo">Buscar por nome ou email:</label>
 </div>
 
-<!-- Caixa do campo e botão -->
 <div class="search-container">
   <form action="@{Usuarios.listar}" class="search-form-inside">
     <input 
@@ -20,22 +18,6 @@
   </form>
 </div>
 
-<!--- <div class="search-container">
-  <form class="search-form">
-    <input
-      type="text"
-      class="search-input"
-      placeholder="Digite nome ou email"
-    />
-    <button type="submit" class="search-button">Enviar</button>
-  </form>
-</div> --->
-
-
-
-
-
-<!-- Lista de usuários em formato de cards -->
 <div class="user-cards-container">
   #{list items: usuarios, as:'u'}
     <div class="user-card">
@@ -53,7 +35,6 @@
   #{/else}
 </div>
 
-<!-- Botão cadastrar -->
 <div style="text-align: center; margin-top: 2rem;">
   <a href="@{Usuarios.form}" class="action-button">Cadastrar Novo</a>
 </div>

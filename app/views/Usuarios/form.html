@@ -1,11 +1,5 @@
-#{extends 'main.html' /} 
-
-#{if u} 
-#{set title:'Edição de Usuario' /} 
-#{/if} 
-#{else} 
-#{set titlt:'Cadastro de Usuario' /} 
-#{/else}
+#{extends 'main.html' /} #{if u} #{set title:'Edição de Usuario' /}
+#{/if} #{else} #{set titlt:'Cadastro de Usuario' /} #{/else}
 
 <form action="@{Usuarios.salvar}" style="color: white;">
 	<input type="hidden" name="u.id" value="${u?.id}">
@@ -29,13 +23,9 @@
 
 	<div class="mb-3">
 		<label class="form-label">Filme:</label> <select class="form-select"
-			name="u.filme.id"> 
-			#{list items:filmes, as:'f'}
-			<option value="${f.id}" 
-			${f.id == u?.filme?.id ? 'selected' : ''}>
-						${f.nome}
-				</option>
-			#{/list}
+			name="u.filme.id"> #{list items:filmes, as:'f'}
+			<option value="${f.id}" ${f.id==u?.filme?.id?'selected' : ''}>
+				${f.nome}</option> #{/list}
 		</select>
 	</div>
 
