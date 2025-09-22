@@ -1,6 +1,7 @@
 package jobs;
 
 import models.Filme;
+import models.Perfil;
 import models.Usuario;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
@@ -40,6 +41,7 @@ public class Inicializador extends Job {
 			joao.email = "joao12new@gmail.com";
 			joao.senha = "1234";
 			joao.telefone = "84 991678900";
+			joao.perfil = Perfil.ADMINISTRADOR;
 			// joao.filme = romance3 - não funciona
 			// está com alguns errros, tirar duvida com professor
 			joao.save();			

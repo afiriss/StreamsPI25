@@ -18,8 +18,12 @@ public class Usuario extends Model{
 	@Enumerated(EnumType.STRING)
 	public Status status;
 
+	@Enumerated(EnumType.STRING)
+	public Perfil perfil;
+	
 	public Usuario() {
 		this.status = Status.ATIVO;
+		this.perfil = Perfil.ADMINISTRADOR;
 	}
 	
 	@ManyToOne

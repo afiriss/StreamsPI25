@@ -8,10 +8,12 @@ import models.Usuario;
 import models.Usuario;
 import play.mvc.Controller;
 import play.mvc.With;
+import security.Administrador;
 
 @With(Seguranca.class)
 public class Usuarios extends Controller{
 	
+	@Administrador
 	public static void form() {
 		List<Filme> filmes = Filme.findAll();
 		render(filmes);
@@ -42,6 +44,7 @@ public class Usuarios extends Controller{
 		renderTemplate("Usuarios/form.html", u, filmes);
 	}
 	
+	@Administrador
 	public static void salvar(Usuario u) {
 		if (u.nome != null) {
 			u.nome = u.nome.toUpperCase();
