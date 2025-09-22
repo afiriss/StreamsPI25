@@ -1,6 +1,7 @@
 package jobs;
 
 import models.Filme;
+import models.Usuario;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 
@@ -34,5 +35,13 @@ public class Inicializador extends Job {
 				terror3.save();
 			
 		}
+			Usuario joao = new Usuario();
+			joao.nome = "João da silva";
+			joao.email = "joao12new@gmail.com";
+			joao.senha = "1234";
+			joao.telefone = "84 991678900";
+			// joao.filme = romance3 - não funciona
+			// está com alguns errros, tirar duvida com professor
+			joao.save();			
 		}
 	}

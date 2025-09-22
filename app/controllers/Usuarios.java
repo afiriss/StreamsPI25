@@ -7,7 +7,9 @@ import models.Status;
 import models.Usuario;
 import models.Usuario;
 import play.mvc.Controller;
+import play.mvc.With;
 
+@With(Seguranca.class)
 public class Usuarios extends Controller{
 	
 	public static void form() {
