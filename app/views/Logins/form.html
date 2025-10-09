@@ -32,11 +32,13 @@
 
        #{if session.contains('usuarioLogado')}
            <p>Você está logado como: ${session.get('usuarioLogado')}</p>
+           <a href="@{usuarios.form()}" class="btn btn-secondary">Cadastrar Novo Usuário</a>
            <a href="@{Logins.logout()}" class="btn btn-secondary">Sair</a>
        #{/if}
    </div>
 
    <style>
+   		p {color: white}
        .form-group { margin-bottom: 15px; }
        .form-control { width: 100%; padding: 8px; }
        .alert { padding: 10px; margin-bottom: 15px; border-radius: 4px; }
