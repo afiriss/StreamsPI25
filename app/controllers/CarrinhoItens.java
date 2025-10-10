@@ -13,11 +13,11 @@ public class CarrinhoItens extends Controller{
 	public static void adicionar(Long id) {
         Filme filme = Filme.findById(id);
         if (filme != null) {
-            List<CarrinhoItem> itens = session.get("carrinho") != null ? 
+            List<CarrinhoItem> filmes = session.get("carrinho") != null ? 
                 (List<CarrinhoItem>) play.cache.Cache.get(session.getId()) : new ArrayList<>();
             
             boolean found = false;
-            for (CarrinhoItem item : itens) {
+            for (CarrinhoItem item : filmes) {
                 if (item.filme.id.equals(id)) {
                     item.quantidade++;
                     found = true;
@@ -25,9 +25,9 @@ public class CarrinhoItens extends Controller{
                 }
             }
         if (!found) {
-        	itens.add(new CarrinhoItem(filme, 1));
+        	filmes.add(new CarrinhoItem(filme, 1));
             }
-        play.cache.Cache.set(session.getId(), itens, "30mn");
+        play.cache.Cache.set(session.getId(), filmes, "30mn");
         session.put("carrinho", "true");
         }
         
