@@ -11,12 +11,12 @@ import models.Filme;
 public class Application extends Controller {
 
 	    public static void index() {
-	        listarLivros();
+	        listarFilmes();
 	    }
 	    
-	    public static void listarLivros() {
+	    public static void listarFilmes() {
 	        List<Filme> filmes = Filme.findAll();
-	        render(filmes);
+	        render(filmes, '' );
 	    }
 
 }

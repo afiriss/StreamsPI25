@@ -10,11 +10,18 @@ import play.mvc.Controller;
 public class CarrinhoItens extends Controller{
 	
 
-	public static void adicionar(Long id) {
+	private static List<CarrinhoItem> getCarrinhoDaSessao() {
+        Object cachedCarrinho = play.cache.Cache.get(session.getId());
+        if (cachedCarrinho != null && cachedCarrinho instanceof List) {
+            return (List<CarrinhoItem>) cachedCarrinho;
+        }
+        return new ArrayList<>();
+    }
+
+    public static void adicionar(Long id) {
         Filme filme = Filme.findById(id);
         if (filme != null) {
-            List<CarrinhoItem> itens = session.get("carrinho") != null ? 
-                (List<CarrinhoItem>) play.cache.Cache.get(session.getId()) : new ArrayList<>();
+            List<CarrinhoItem> itens = getCarrinhoDaSessao();
             
             boolean found = false;
             for (CarrinhoItem item : itens) {
@@ -24,52 +31,41 @@ public class CarrinhoItens extends Controller{
                     break;
                 }
             }
-        if (!found) {
-        	itens.add(new CarrinhoItem(filme, 1));
+
+            if (!found) {
+                itens.add(new CarrinhoItem(filme, 1));
             }
-        play.cache.Cache.set(session.getId(), itens, "30mn");
-        session.put("carrinho", "true");
+            
+            play.cache.Cache.set(session.getId(), itens, "30mn");
+        }
+        ver(); // Redireciona para a página do carrinho
+    }
+
+    public static void ver() {
+        List<CarrinhoItem> itens = getCarrinhoDaSessao();
+        
+        double total = 0;
+        for (CarrinhoItem item : itens) {
+            total += item.getSubtotal();
         }
         
-     // Redireciona para a página do carrinho
+        render(itens, total);
+    }
+    
+    public static void remover(Long id) {
+        List<CarrinhoItem> itens = getCarrinhoDaSessao();
+            
+        // Usar um Iterator é mais seguro para remover itens de uma lista
+        itens.removeIf(item -> item.filme.id.equals(id));
+        
+        play.cache.Cache.set(session.getId(), itens, "30mn");
         ver();
-	}
-	
-	// pagina que mostra o carrinho
-	 public static void ver() {
-	        List<CarrinhoItem> itens = session.get("carrinho") != null ? 
-	            (List<CarrinhoItem>) play.cache.Cache.get(session.getId()) : new ArrayList<>();
-	        
-	        double total = 0;
-	        for (CarrinhoItem item : itens) {
-	            total += item.getSubtotal();
-	        }
-	        
-	        render(itens, total);
-	    }
-	 
-	 //remove item do carrinho
-	 public static void remover(Long id) {
-	        List<CarrinhoItem> itens = session.get("carrinho") != null ? 
-	            (List<CarrinhoItem>) play.cache.Cache.get(session.getId()) : new ArrayList<>();
-	            
-	        for (int i = 0; i < itens.size(); i++) {
-	            if (itens.get(i).filme.id.equals(id)) {
-	                itens.remove(i);
-	                break;
-	            }
-	        }
-	        
-	        play.cache.Cache.set(session.getId(), itens, "30mn");
-	        ver();
-	    }
+    }
 
-        //remove tudo do carrinho	 
- 	    public static void limpar() {
-	        play.cache.Cache.delete(session.getId());
-	        session.remove("carrinho");
-	        ver();
-	    }
+    public static void limpar() {
+        play.cache.Cache.delete(session.getId());
+        ver();
+    }
 }
 
 

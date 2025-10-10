@@ -39,18 +39,9 @@ public class Logins extends Controller{
 	        }
 	    }
 
-	
 	    public static void logout() {
-	        // Limpa todas as informações da sessão do usuário
 	        session.clear();
-	        
-	        // Adiciona uma mensagem de sucesso para ser exibida na próxima página
 	        flash.success("Você saiu do sistema!");
-	        
-	        // --- INÍCIO DA MODIFICAÇÃO ---
-	        // Em vez de chamar o form() local, agora chamamos a ação form()
-	        // do controlador Indexprincipal, que é a sua página inicial.
-	        Index.form();
-	     
+	        form();
 	    }
-}
+	}

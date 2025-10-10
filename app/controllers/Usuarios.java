@@ -19,6 +19,7 @@ public class Usuarios extends Controller {
     }
 
     // Este método também é PÚBLICO para permitir que novos usuários se cadastrem.
+    @Administrador
     public static void salvar(Usuario u, String confirmacaoSenha) {
         // Validação da senha
         if (u.id == null || (u.senha != null && !u.senha.isEmpty())) {
