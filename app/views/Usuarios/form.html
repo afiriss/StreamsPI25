@@ -14,21 +14,36 @@
 		<label class="form-label">E-mail:</label> <input class="form-control"
 			type="text" name="u.email" value="${u?.email}">
 	</div>
-
-	<div class="mb-3">
-		<label class="form-label">Telefone:</label> <input
-			class="form-control" type="text" name="u.telefone"
-			value="${u?.telefone}">
+	
+	<div>
+	    <label class="form-label">Senha:</label>
+	    <input class="form-control" type="password" name="u.senha" value="">
+	    #{if u?.id}
+	        <small class="form-text text-muted">Deixe em branco para não alterar a senha.</small>
+	    #{/if}
+	</div>
+	
+	<div>
+		<label class="form-label">Confirme a senha:</label> 
+		<input class="form-control" type="password" name="confirmacaoSenha" value="">
 	</div>
 
-	<div class="mb-3">
-		<label class="form-label">Filme:</label> <select class="form-select"
-			name="u.filme.id"> #{list items:filmes, as:'f'}
-			<option value="${f.id}" ${f.id==u?.filme?.id?'selected' : ''}>
-				${f.nome}</option> #{/list}
-		</select>
-	</div>
+	  <div class="mb-3">
+        <label class="form-label">Telefone:</label>
+        <input class="form-control" type="text" name="u.telefone" value="${u?.telefone}">
+    </div>
 
-	<input class="btn btn-primary" type="submit"
-		value="${u ? 'Editar':'Cadastrar'}">
+<!--  
+    <div class="mb-3">
+        <label class="form-label">Filme Favorito:</label>
+        <select class="form-select" name="u.filme.id">
+            #{list items:filmes, as:'f'}
+                <option value="${f.id}" ${f.id==u?.filme?.id?'selected' : ''}>
+                    ${f.nome}
+                </option>
+            #{/list}
+        </select>
+    </div>
+-->
+    <input class="btn btn-primary" type="submit" value="${u?.id ? 'Salvar Alterações':'Cadastrar'}">
 </form>

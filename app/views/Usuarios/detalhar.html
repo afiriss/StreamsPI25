@@ -9,7 +9,7 @@
       <p><strong>Nome:</strong> ${u.nome}</p>
       <p><strong>Email:</strong> ${u.email}</p>
       <p><strong>Telefone:</strong> ${u.telefone}</p>
-      <p><strong>Filme favorito:</strong> ${u.filme}</p>
+      <p><strong>Filme favorito:</strong> ${u.filme ?: 'Nenhum filme selecionado'}</p>
 
       <div class="mt-4 d-flex gap-3">
         <a class="btn btn-success" href="@{Usuarios.form}">Cadastrar Novo</a>

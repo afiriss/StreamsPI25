@@ -1,0 +1,44 @@
+#{extends 'main.html' /}
+#{set title:'Carrinho de Compras' /}
+
+<div class="container">
+    <h1>Seu Carrinho</h1>
+
+    #{if itens.isEmpty()}
+        <p>Seu carrinho está vazio.</p>
+    #{/if}
+    #{else}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Preço</th>
+                    <th>Quantidade</th>
+                    <th>Subtotal</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                #{list items:itens, as:'item'}
+                    <tr>
+                        <td>${item.filme.nome}</td>
+                        <td>R$ ${item.filme.preco}</td>
+                        <td>${item.quantidade}</td>
+                        <td>R$ ${item.getSubtotal()}</td>
+                        <td><a href="@{Carrinho.remover(item.filme.id)}" class="btn btn-danger btn-sm">Remover</a></td>
+                    </tr>
+                #{/list}
+            </tbody>
+        </table>
+
+        <h3>Total: R$ ${total}</h3>
+
+        <div>
+            <a href="@{Carrinho.limpar()}" class="btn btn-warning">Limpar Carrinho</a>
+            <a href="#" class="btn btn-success">Finalizar Compra</a>
+        </div>
+    #{/else}
+    <div>
+         <a href="@{Application.listarLivros()}" class="btn btn-secondary">Continuar Comprando</a>
+    </div>
+</div>
