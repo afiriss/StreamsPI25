@@ -1,0 +1,26 @@
+#{extends 'main.html' /}
+#{set title:'Catálogo de Filmes' /}
+
+<h1 class="text-center mt-5 text-danger">Nosso Catálogo de Filmes</h1>
+<br>
+
+<div class="container">
+    <div class="row justify-content-center">
+
+        #{list items:filmes, as:'filme'}
+            <div class="col-md-4 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top"
+                        
+                         alt="Capa do filme ${filme.nome}">
+                    <div class="card-body">
+                        <h5 class="card-title">${filme.nome}</h5>
+                        <p class="card-text">${filme.genero}</p>
+                        <a href="#" class="btn btn-warning">Adicionar ao Carrinho</a>
+                    </div>
+                </div>
+            </div>
+        #{/list}
+
+    </div>
+</div>

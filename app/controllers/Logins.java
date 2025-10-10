@@ -18,6 +18,7 @@ public class Logins extends Controller{
 			session.put("usuarioLogado", usuario.email);
 			session.put("usuarioPerfil", usuario.perfil.name());
 			flash.success("Logado com sucesso!");
+			Filmes.listar();
 			Usuarios.listar(null);
 		}
 	}
