@@ -10,13 +10,13 @@ import models.Filme;
 
 public class Application extends Controller {
 
-	    public static void index() {
-	        listarFilmes();
-	    }
+	  //  public static void index() {
+	     //   listarFilmes();
+	   // }
 	    
-	    public static void listarFilmes() {
-	        List<Filme> filmes = Filme.findAll();
-	        render(filmes, '' );
-	    }
+	 //   public static void listarFilmes() {
+	   //     List<Filme> filmes = Filme.findAll();
+	     //   render(filmes, '' );
+	    //}
 
 }
