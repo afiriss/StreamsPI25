@@ -8,15 +8,17 @@ import play.db.jpa.Model;
 public class Filme extends Model{
 	public String nome;
 	public String genero;
+	public Double preco;
 	
 	public Filme() {
 		
 	}
 	
-	public Filme(String nome, String genero) {
+	public Filme(String nome, String genero, Double preco) {
 		this.nome = nome;
 		this.genero = genero;
-	}
+		this.preco = preco;	
+		}
 	
 	@Override
 	public String toString() {

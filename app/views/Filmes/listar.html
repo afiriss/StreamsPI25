@@ -5,22 +5,18 @@
 <br>
 
 <div class="container">
-    <div class="row justify-content-center">
-
+    <h1>Nossos Livros</h1>
+    <div class="row">
         #{list items:filmes, as:'filme'}
             <div class="col-md-4 mb-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top"
-                        
-                         alt="Capa do filme ${filme.nome}">
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">${filme.nome}</h5>
-                        <p class="card-text">${filme.genero}</p>
-                        <a href="#" class="btn btn-warning">Adicionar ao Carrinho</a>
+                        <p class="card-text">R$ ${filme.preco.format('##0.00')}</p>
+                        <a href="@{CarrinhoItens.adicionar(filme.id)}" class="btn btn-primary">Adicionar ao Carrinho</a>
                     </div>
                 </div>
             </div>
         #{/list}
-
     </div>
 </div>
