@@ -92,16 +92,10 @@
 }
 
 body {
-  margin: 0;
-  font-family: var(--bs-body-font-family);
-  font-size: var(--bs-body-font-size);
-  font-weight: var(--bs-body-font-weight);
-  line-height: var(--bs-body-line-height);
-  color: var(--bs-body-color);
-  text-align: var(--bs-body-text-align);
-  background-color: var(--bs-body-bg);
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+ background-color: #0A0A0A !important; /* Cor de fundo principal */
+  color: #F5F5F5 !important;
+  font-family: 'Poppins', sans-serif;
+  background-image: none !important
 }
 
 hr {
@@ -4150,33 +4144,12 @@ textarea.form-control-lg {
 }
 
 .card {
-  --bs-card-spacer-y: 1rem;
-  --bs-card-spacer-x: 1rem;
-  --bs-card-title-spacer-y: 0.5rem;
-  --bs-card-border-width: 1px;
-  --bs-card-border-color: var(--bs-border-color-translucent);
-  --bs-card-border-radius: 0.375rem;
-  --bs-card-box-shadow: ;
-  --bs-card-inner-border-radius: calc(0.375rem - 1px);
-  --bs-card-cap-padding-y: 0.5rem;
-  --bs-card-cap-padding-x: 1rem;
-  --bs-card-cap-bg: rgba(0, 0, 0, 0.03);
-  --bs-card-cap-color: ;
-  --bs-card-height: ;
-  --bs-card-color: ;
-  --bs-card-bg: #fff;
-  --bs-card-img-overlay-padding: 1rem;
-  --bs-card-group-margin: 0.75rem;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  height: var(--bs-card-height);
-  word-wrap: break-word;
-  background-color: var(--bs-card-bg);
-  background-clip: border-box;
-  border: var(--bs-card-border-width) solid var(--bs-card-border-color);
-  border-radius: var(--bs-card-border-radius);
+ background-color: #111;
+  border: 1px solid #D97706; /* Borda âmbar */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 0px 10px rgba(228, 180, 60, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;  
 }
 .card > hr {
   margin-right: 0;
@@ -4208,7 +4181,7 @@ textarea.form-control-lg {
 }
 
 .card-title {
-  margin-bottom: var(--bs-card-title-spacer-y);
+  color: #E4B43C; /* Título do filme em dourado */
 }
 
 .card-subtitle {
@@ -4217,7 +4190,7 @@ textarea.form-control-lg {
 }
 
 .card-text:last-child {
-  margin-bottom: 0;
+  color: #B0B0B0; /* Texto secundário (gênero) */
 }
 
 .card-link + .card-link {
@@ -4233,6 +4206,10 @@ textarea.form-control-lg {
 }
 .card-header:first-child {
   border-radius: var(--bs-card-inner-border-radius) var(--bs-card-inner-border-radius) 0 0;
+}
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 0px 20px rgba(228, 180, 60, 0.5);
 }
 
 .card-footer {
@@ -8060,8 +8037,12 @@ textarea.form-control-lg {
 }
 
 .text-danger {
+  color: #E4B43C;
+  font-size: 28px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
   --bs-text-opacity: 1;
-  color: rgba(var(--bs-danger-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-light {
@@ -10826,7 +10807,8 @@ textarea.form-control-lg {
   }
 }
 body {
-  background-image: linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url("../assets/img/site.jpg");
+  background-color: #0D0B1E; /* Cor de fundo principal */
+  background-image: linear-gradient(rgba(13, 11, 30, 0.85), rgba(13, 11, 30, 0.85)), url("../assets/img/site.jpg");
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
@@ -10837,7 +10819,7 @@ p {
 }
 
 .text-faded {
-  color: #f6e1c5;
+  color: #E2E8F0; /* Texto principal */
 }
 
 .site-heading {
@@ -10848,11 +10830,15 @@ p {
   font-family: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 .site-heading .site-heading-upper {
+  color: #F5F5F5; /* Branco gelo */
   display: block;
   font-size: 2rem;
   font-weight: 800;
 }
 .site-heading .site-heading-lower {
+  color: #E4B43C;  /* Dourado suave - LINHA ADICIONADA */
+  font-weight: bold;
+  letter-spacing: 2px;
   font-size: 5rem;
   font-weight: 100;
   line-height: 4rem;
@@ -10891,15 +10877,16 @@ p {
 }
 
 #mainNav {
-  background-color: rgba(47, 23, 15, 0.9);
+  background:  #0A0A0A;
+   border-bottom: 1px solid #D97706; /* Âmbar */
   font-family: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 #mainNav .navbar-brand {
   color: #e6a756;
 }
 #mainNav .navbar-nav .nav-item .nav-link {
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 800;
+ color: #F5F5F5;
+  transition: color 0.3s;
 }
 #mainNav .navbar-nav .nav-item.active .nav-link {
   color: #e6a756;
@@ -10909,10 +10896,10 @@ p {
     font-size: 0.9rem;
   }
   #mainNav .navbar-nav .nav-item .nav-link:hover {
-    color: rgba(255, 255, 255, 0.4);
+   color: #E4B43C; /* Dourado ao passar o mouse ou no item ativo */
   }
   #mainNav .navbar-nav .nav-item.active .nav-link:hover {
-    color: #e6a756;
+   color: #E4B43C; /* Dourado ao passar o mouse ou no item ativo */
   }
 }
 
