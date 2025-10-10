@@ -24,7 +24,7 @@
 	</div>
 	
 	<div>
-		<label class="form-label">Confirme a senha:</label>
+		<label class="form-label">Confirme a senha:</label> 
 		<input class="form-control" type="password" name="confirmacaoSenha" value="">
 	</div>
 
@@ -33,6 +33,7 @@
         <input class="form-control" type="text" name="u.telefone" value="${u?.telefone}">
     </div>
 
+<!--  
     <div class="mb-3">
         <label class="form-label">Filme Favorito:</label>
         <select class="form-select" name="u.filme.id">
@@ -43,6 +44,6 @@
             #{/list}
         </select>
     </div>
-
+-->
     <input class="btn btn-primary" type="submit" value="${u?.id ? 'Salvar Alterações':'Cadastrar'}">
 </form>
