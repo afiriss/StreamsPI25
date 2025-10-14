@@ -124,37 +124,28 @@ form h1 {
     filter: brightness(1.2);
 }
 
-.btn-secondary {
-    background-color: transparent;
-    border: 1px solid #f9f9f9;
-    color: #f9f9f9;
-    font-weight: 700;
-    width: 100%;
-    padding: 15px;
-    border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.btn-secondary:hover {
-    background-color: #f9f9f9;
-    color: #040714;
-}
-
 /* =================================================================== */
 /* Catálogo de Filmes (listar.html) */
 /* =================================================================== */
 
-.page-title {
-    font-size: 2.5rem;
-    margin: 2rem 0;
-    text-align: center;
-    letter-spacing: 2px;
+.genre-section {
+    margin-bottom: 4rem; /* Aumenta o espaço entre as seções de gênero */
+}
+
+.genre-title {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #33364a;
 }
 
 .movie-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    /* Aumenta o tamanho mínimo do card e o espaçamento */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px; 
 }
 
 .movie-card {
@@ -162,15 +153,16 @@ form h1 {
     overflow: hidden;
     position: relative;
     transform: scale(1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Adiciona uma transição de box-shadow suave */
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
     cursor: pointer;
-    border: 3px solid transparent;
+    border: none; /* Remove a borda anterior */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra inicial sutil */
 }
 
 .movie-card:hover {
-    transform: scale(1.05);
-    border-color: #f9f9f9;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform: scale(1.06); /* Aumenta um pouco mais no hover */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7); /* Sombra mais pronunciada */
 }
 
 .movie-card img {
@@ -198,7 +190,7 @@ form h1 {
 }
 
 .movie-card h5 {
-    font-size: 1rem;
+    font-size: 1.1rem; /* Aumenta a fonte do título */
     text-transform: none;
     margin-bottom: 5px;
 }
@@ -222,7 +214,6 @@ form h1 {
 /* =================================================================== */
 /* Carrinho (ver.html) */
 /* =================================================================== */
-
 .table {
     color: #e5e5e5;
 }

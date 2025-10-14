@@ -1,21 +1,64 @@
 #{extends 'main.html' /} 
 #{set title:'Catálogo' /}
 
-<h1 class="page-title text-center">Catálogo de Filmes</h1>
+<div class="container">
+    <h1 class="page-title text-center">Catálogo de Filmes</h1>
 
-<div class="movie-grid">
-    #{list items:filmes, as:'filme'}
-        <div class="movie-card">
-            <img src="/public/images/${filme.imagemUrl}" alt="Capa do filme ${filme.nome}">
-
-            <div class="info">
-                <h5>${filme.nome}</h5>
-                <p>${filme.genero}</p>
-                <a href="@{Carrinho.adicionar(filme.id)}" class="btn btn-add-cart mt-2">Adicionar</a>
+    #{if filmesRomance.size() > 0}
+        <div class="genre-section">
+            <h2 class="genre-title">Romance</h2>
+            <div class="movie-grid">
+                #{list items:filmesRomance, as:'filme'}
+                    <div class="movie-card">
+                        <img src="/public/images/${filme.imagemUrl}" alt="Capa do filme ${filme.nome}">
+                        <div class="info">
+                            <h5>${filme.nome}</h5>
+                            <p>${filme.genero}</p>
+                            <a href="@{Carrinho.adicionar(filme.id)}" class="btn btn-add-cart mt-2">Adicionar</a>
+                        </div>
+                    </div>
+                #{/list}
             </div>
         </div>
-    #{/list}
-    #{else}
-        <p class="text-center mt-5">Nenhum filme encontrado no catálogo.</p>
-    #{/else}
+    #{/if}
+
+    #{if filmesComedia.size() > 0}
+        <div class="genre-section">
+            <h2 class="genre-title">Comédia</h2>
+            <div class="movie-grid">
+                #{list items:filmesComedia, as:'filme'}
+                    <div class="movie-card">
+                        <img src="/public/images/${filme.imagemUrl}" alt="Capa do filme ${filme.nome}">
+                        <div class="info">
+                            <h5>${filme.nome}</h5>
+                            <p>${filme.genero}</p>
+                            <a href="@{Carrinho.adicionar(filme.id)}" class="btn btn-add-cart mt-2">Adicionar</a>
+                        </div>
+                    </div>
+                #{/list}
+            </div>
+        </div>
+    #{/if}
+
+    #{if filmesTerror.size() > 0}
+        <div class="genre-section">
+            <h2 class="genre-title">Terror</h2>
+            <div class="movie-grid">
+                #{list items:filmesTerror, as:'filme'}
+                    <div class="movie-card">
+                        <img src="/public/images/${filme.imagemUrl}" alt="Capa do filme ${filme.nome}">
+                        <div class="info">
+                            <h5>${filme.nome}</h5>
+                            <p>${filme.genero}</p>
+                            <a href="@{Carrinho.adicionar(filme.id)}" class="btn btn-add-cart mt-2">Adicionar</a>
+                        </div>
+                    </div>
+                #{/list}
+            </div>
+        </div>
+    #{/if}
+    
+    #{if filmesRomance.isEmpty() && filmesComedia.isEmpty() && filmesTerror.isEmpty()}
+         <p class="text-center mt-5">Nenhum filme encontrado no catálogo.</p>
+    #{/if}
 </div>
