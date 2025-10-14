@@ -1,83 +1,67 @@
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Sysout Pictures - #{get 'title' /}</title>
-    <link rel="icon" type="image/x-icon"
-        href="@{'public/startbootstrap-business-casual-gh-pages/assets/favicon.ico'}" />
-    <link
-        href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i"
-        rel="stylesheet" />
-    <link
-        href="@{'public/startbootstrap-business-casual-gh-pages/css/styles.css'}"
-        rel="stylesheet" />
-    <link rel="stylesheet" media="screen"
-        href="@{'/public/stylesheets/main.css'}">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+    
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
     #{get 'moreStyles' /}
-    <link rel="shortcut icon" type="image/png"
-        href="@{'/public/images/favicon.png'}">
 </head>
-
 <body>
 
-    <header>
-        <h1 class="site-heading text-center text-faded d-none d-lg-block">
-            <span class="site-heading-upper text-primary mb-3">IF - Encine</span>
-            <span class="site-heading-lower">Sysout pictures</span>
-        </h1>
-    </header>
-
-    <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand text-uppercase fw-bold d-lg-none"
-                href="index.html">Sysout Pictures</a>
-            <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-auto">
-                    #{if session.contains('usuarioLogado')}
-                        <li class="nav-item px-lg-4"><a
-                            class="nav-link text-uppercase" href="@{Filmes.listar()}">Catálogo</a></li>
-                        
-                        <li class="nav-item px-lg-4"><a
-                            class="nav-link text-uppercase" href="@{Carrinho.ver()}">Meu Carrinho</a></li>
-                        
-                        <li class="nav-item px-lg-4"><a
-                            class="nav-link text-uppercase" href="@{Logins.logout()}">Sair</a></li>
-                    #{/if}
-                    #{else}
-                        <li class="nav-item px-lg-4"><a
-                            class="nav-link text-uppercase" href="@{Application.index()}">Login</a></li>
-                        <li class="nav-item px-lg-4"><a
-                            class="nav-link text-uppercase" href="@{Usuarios.form()}">Cadastre-se</a></li>
-                    #{/else}
-                </ul>
+    <header class="main-header">
+        <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand site-logo" href="@{Application.index()}">SYSOUT</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto">
+                        #{if session.contains('usuarioLogado')}
+                            <li class="nav-item"><a class="nav-link" href="@{Filmes.listar()}">Catálogo</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@{Carrinho.ver()}">Carrinho</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@{Logins.logout()}">Sair</a></li>
+                        #{/if}
+                        #{else}
+                            <li class="nav-item"><a class="nav-link" href="@{Application.index()}">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@{Usuarios.form()}">Assine Agora</a></li>
+                        #{/else}
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-    #{doLayout /}
+        </nav>
+    </header>
+    
+    <main class="container my-5">
+        #{if flash.error}
+            <div class="alert alert-danger text-center">${flash.error}</div>
+        #{/if}
+        #{if flash.success}
+            <div class="alert alert-success text-center">${flash.success}</div>
+        #{/if}
+        #{if usuario}
+            <div class="text-center my-4">
+                <h4>Bem-vindo(a), ${usuario.nome}!</h4>
+            </div>
+        #{/if}
 
+        #{doLayout /}
+    </main>
 
-    <footer class="footer text-faded text-center py-5">
-        <div class="container">
-            <p class="m-0 small">Feito com carinho por: Antônio Vitor, Ellen
-                Iris e Mel Elói ♡</p>
-        </div>
+    <footer class="main-footer mt-5 py-4 text-center">
+        <p class="m-0 small">Sysout Pictures &copy; 2025. Feito por Antônio Vitor, Ellen Iris e Mel Elói</p>
     </footer>
-    <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}"
-        type="text/javascript" charset="${_response_encoding}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     #{get 'moreScripts' /}
 </body>

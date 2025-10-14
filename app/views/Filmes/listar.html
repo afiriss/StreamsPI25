@@ -1,32 +1,21 @@
-#{extends 'main.html' /} #{set title:'Catálogo de Filmes' /}
+#{extends 'main.html' /} 
+#{set title:'Catálogo' /}
 
-<h1 class="text-center mt-5 text-danger">Nosso Catálogo de Filmes</h1>
+<h1 class="page-title text-center">Catálogo de Filmes</h1>
 
-<div style="text-align: center; margin: 20px;">
-	<a href="@{Logins.logout()}" class="btn btn-danger">Sair</a>
-</div>
+<div class="movie-grid">
+    #{list items:filmes, as:'filme'}
+        <div class="movie-card">
+            <img src="/public/images/${filme.imagemUrl}" alt="Capa do filme ${filme.nome}">
 
-<br>
-
-<div class="container">
-	<div class="row justify-content-center">
-
-		#{list items:filmes, as:'filme'}
-		<div class="col-md-4 mb-4">
-			<div class="card" style="width: 18rem;">
-				<img class="card-img-top" alt="Capa do filme ${filme.nome}">
-				<div class="card-body">
-					<h5 class="card-title">${filme.nome}</h5>
-					<p class="card-text">${filme.genero}</p>
-					<a href="@{Carrinho.adicionar(filme.id)}" class="btn btn-warning">Adicionar
-						ao Carrinho</a>
-				</div>
-			</div>
-		</div>
-		#{/list} #{else}
-		<p class="text-center text-white">Nenhum filme encontrado no
-			catálogo.</p>
-		#{/else}
-
-	</div>
+            <div class="info">
+                <h5>${filme.nome}</h5>
+                <p>${filme.genero}</p>
+                <a href="@{Carrinho.adicionar(filme.id)}" class="btn btn-add-cart mt-2">Adicionar</a>
+            </div>
+        </div>
+    #{/list}
+    #{else}
+        <p class="text-center mt-5">Nenhum filme encontrado no catálogo.</p>
+    #{/else}
 </div>

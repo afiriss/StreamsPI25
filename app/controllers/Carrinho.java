@@ -1,11 +1,13 @@
 package controllers;
 
 import java.util.List;
-import models.Usuario;
+
 import models.CarrinhoItem;
 import models.Filme;
+import models.Usuario;
 import play.mvc.Controller;
 import play.mvc.With;
+
 
 @With(Seguranca.class)
 public class Carrinho extends Controller {
@@ -39,6 +41,7 @@ public class Carrinho extends Controller {
 			}else {
 				// se não exite, cria um novo item no carrinho
 				CarrinhoItem novoItem = new CarrinhoItem(usuarioLogado, filmeParaAdicionar, 1);
+				// novoItem.usuario = usuarioLogado;
 				 usuarioLogado.carrinho.add(novoItem); // Adiciona na lista do usuário
 	                usuarioLogado.save(); // Salva o usuário, o que também salva o novo item por causa do 'cascade'
 	            }
@@ -83,3 +86,6 @@ public class Carrinho extends Controller {
 	        ver();
 	    }
 	}
+
+//@Valid lembrar pra que serve (se não, não vai rodar)
+//Só caso precisemos 

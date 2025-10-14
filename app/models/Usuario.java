@@ -10,14 +10,23 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import play.data.validation.*; // Importar validações
 import play.db.jpa.Model;
 
 @Entity
 public class Usuario extends Model{
 	
+	@Required(message="O nome é um campo obrigatório")
 	public String nome;
+	
+	@Required(message="O e-mail é um campo obrigatório")
+	@Email(message="Forneça um e-mail válido")
 	public String email;
+	
 	public String telefone;
+	
+	@Required(message="A senha é um campo obrigatório")
+	@MinSize(value=6, message="A senha deve ter no mínimo 6 caracteres")
 	public String senha;
 	
 	@Enumerated(EnumType.STRING)
@@ -26,24 +35,16 @@ public class Usuario extends Model{
 	@Enumerated(EnumType.STRING)
 	public Perfil perfil;
 	
-	//	Um usuário TEM MUITOS itens no carrinho (OneToMany).
-    //    'cascade = CascadeType.ALL' significa: se eu salvar, alterar ou deletar um usuário,
-    //    faça o mesmo com os itens de carrinho associados a ele. Facilita muito a vida.
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    public List<CarrinhoItem> carrinho; // O carrinho de COMPRAS do usuário
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	public List<CarrinhoItem> carrinho;
 	
 	public Usuario() {
 		this.status = Status.ATIVO;
 		this.perfil = Perfil.ADMINISTRADOR;
-		//a lista para evitar erros (NullPointerException).
-        //    Assim, todo novo usuário já começa com uma lista de filmes vazia.
 		this.filmes = new ArrayList<>();
 		this.carrinho = new ArrayList<>();
 	}
 	
 	@ManyToMany
-	//O atributo 'filme' (singular) virou 'filmes' (plural) para guardar uma lista.
-    //    Em vez de um único objeto Filme, teremos uma coleção.
 	public List<Filme> filmes;
 }
-
