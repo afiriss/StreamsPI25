@@ -9,8 +9,18 @@
       <p><strong>Nome:</strong> ${u.nome}</p>
       <p><strong>Email:</strong> ${u.email}</p>
       <p><strong>Telefone:</strong> ${u.telefone}</p>
-      <p><strong>Filme favorito:</strong> ${u.filme ?: 'Nenhum filme selecionado'}</p>
 
+      <p><strong>Filmes favoritos:</strong></p>
+      #{if u.filmes.size() > 0}
+        <ul>
+          #{list items:u.filmes, as:'filmeFavorito'}
+            <li>${filmeFavorito.nome}</li>
+          #{/list}
+        </ul>
+      #{/if}
+      #{else}
+        <p>Nenhum filme selecionado.</p>
+      #{/else}
       <div class="mt-4 d-flex gap-3">
         <a class="btn btn-success" href="@{Usuarios.form}">Cadastrar Novo</a>
         <a class="btn btn-secondary" href="@{Usuarios.listar}">Listagem</a>

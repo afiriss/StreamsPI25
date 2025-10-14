@@ -2,219 +2,83 @@
 
 <html>
 <head>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>Sysout Pictures</title>
-<link rel="icon" type="image/x-icon"
-	href="@{'public/startbootstrap-business-casual-gh-pages/assets/favicon.ico'}" />
-<!-- Google fonts-->
-<link
-	href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet" />
-<link
-	href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i"
-	rel="stylesheet" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link
-	href="@{'public/startbootstrap-business-casual-gh-pages/css/styles.css'}"
-	rel="stylesheet" />
-</head>
-
-<link rel="stylesheet" media="screen"
-	href="@{'/public//stylesheets/main.css'}">
-#{get 'moreStyles' /}
-<link rel="shortcut icon" type="image/png"
-	href="@{'/public/images/favicon.png'}">
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Sysout Pictures - #{get 'title' /}</title>
+    <link rel="icon" type="image/x-icon"
+        href="@{'public/startbootstrap-business-casual-gh-pages/assets/favicon.ico'}" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i"
+        rel="stylesheet" />
+    <link
+        href="@{'public/startbootstrap-business-casual-gh-pages/css/styles.css'}"
+        rel="stylesheet" />
+    <link rel="stylesheet" media="screen"
+        href="@{'/public/stylesheets/main.css'}">
+    #{get 'moreStyles' /}
+    <link rel="shortcut icon" type="image/png"
+        href="@{'/public/images/favicon.png'}">
 </head>
 
 <body>
 
-	<header>
+    <header>
+        <h1 class="site-heading text-center text-faded d-none d-lg-block">
+            <span class="site-heading-upper text-primary mb-3">IF - Encine</span>
+            <span class="site-heading-lower">Sysout pictures</span>
+        </h1>
+    </header>
 
-		<h1 class="site-heading text-center text-faded d-none d-lg-block">
-			<span class="site-heading-upper text-primary mb-3">IF - Encine</span>
-			<span class="site-heading-lower">Produção: Sysout pictures</span>
-		</h1>
+    <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand text-uppercase fw-bold d-lg-none"
+                href="index.html">Sysout Pictures</a>
+            <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto">
+                    #{if session.contains('usuarioLogado')}
+                        <li class="nav-item px-lg-4"><a
+                            class="nav-link text-uppercase" href="@{Filmes.listar()}">Catálogo</a></li>
+                        
+                        <li class="nav-item px-lg-4"><a
+                            class="nav-link text-uppercase" href="@{Carrinho.ver()}">Meu Carrinho</a></li>
+                        
+                        <li class="nav-item px-lg-4"><a
+                            class="nav-link text-uppercase" href="@{Logins.logout()}">Sair</a></li>
+                    #{/if}
+                    #{else}
+                        <li class="nav-item px-lg-4"><a
+                            class="nav-link text-uppercase" href="@{Application.index()}">Login</a></li>
+                        <li class="nav-item px-lg-4"><a
+                            class="nav-link text-uppercase" href="@{Usuarios.form()}">Cadastre-se</a></li>
+                    #{/else}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    #{doLayout /}
 
-	</header>
-	<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
-		<div class="container">
-			<a class="navbar-brand text-uppercase fw-bold d-lg-none"
-				href="index.html">Start Bootstrap</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mx-auto">
-					<li class="nav-item px-lg-4"><a
-						class="nav-link text-uppercase" href="#Romance">Romance</a></li>
-					<li class="nav-item px-lg-4"><a
-						class="nav-link text-uppercase" href="#Terror">Terror</a></li>
-					<li class="nav-item px-lg-4"><a
-						class="nav-link text-uppercase" href="#Comédia">Comédia</a></li>
-					<li class="nav-item px-lg-4"><a
-						class="nav-link text-uppercase" href="#Ação">Ação</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<h1 id="Romance" class="text-center mt-5 text-danger">Romance</h1>
-	<br>
 
-	<div class="container">
-		<div class="row justify-content-center">
-
-			<div class="col-md-4 mb-4">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top"
-						src="https://3.bp.blogspot.com/-eRnMSTqWcY4/VB7SWXkiqlI/AAAAAAAAADI/WTrdb8Cs11Y/s1600/A-culpa-e-das-estrelas-poster1.jpg"
-						alt="Imagem de capa do card">
-					<div class="card-body">
-						<h5 class="card-title">A Culpa é das Estrelas</h5>
-						<p class="card-text">Romance</p>
-						<a href="#" class="btn btn-warning">Sinopse</a>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-4 mb-4">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top"
-						src="https://as.sobrenet.pt/s/image/tsr/brandm/content/1920x1280/noinirn3i1z2lcbjbppaaflbva2.jpg"
-						alt="Imagem de capa do card">
-					<div class="card-body">
-						<h5 class="card-title">A Pequena Sereia</h5>
-						<p class="card-text">Romance</p>
-						<a href="#" class="btn btn-warning">Sinopse</a>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-4 mb-4">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top"
-						src="https://vejasp.abril.com.br/wp-content/uploads/2016/12/crepusculo-poster.jpeg"
-						alt="Imagem de capa do card">
-					<div class="card-body">
-						<h5 class="card-title">Crepúsculo</h5>
-						<p class="card-text">Romance</p>
-						<a href="#" class="btn btn-warning">Sinopse</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<h1 id="Terror" class="text-center mt-5 text-danger">Terror</h1>
-	<br>
-
-	<div class="container">
-		<div class="row justify-content-center">
-
-			<div class="col-md-4 mb-4">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top"
-						src="https://www.cineset.com.br/wp-content/uploads/2023/03/panico-6-novo-poster-nacional-190123.jpg"
-						alt="Imagem de capa do card">
-					<div class="card-body">
-						<h5 class="card-title">Pânico 6</h5>
-						<p class="card-text">Terror</p>
-						<a href="#" class="btn btn-warning">Sinopse</a>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-4 mb-4">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top"
-						src="https://cineplaneta.com.br/wp-content/uploads/2023/04/cartaz.44eb8011-644x1024.jpg"
-						alt="Imagem de capa do card">
-					<div class="card-body">
-						<h5 class="card-title">O Exorcista do Papa</h5>
-						<p class="card-text">Terror</p>
-						<a href="#" class="btn btn-warning">Sinopse</a>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-4 mb-4">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top"
-						src="https://i.pinimg.com/originals/28/54/1c/28541c34454177d23e4533fde406b33d.jpg"
-						alt="Imagem de capa do card">
-					<div class="card-body">
-						<h5 class="card-title">João e Maria: Caçadores de Bruxas</h5>
-						<p class="card-text">Terror</p>
-						<a href="#" class="btn btn-warning">Sinopse</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<h1 id="Comédia" class="text-center mt-5 text-danger">Comédia</h1>
-	<br>
-
-	<div class="container">
-		<div class="row justify-content-center">
-			<!-- Card 1 -->
-			<div class="col-md-4 mb-4">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top"
-						src="https://4.bp.blogspot.com/-FJ3C5xcKjkQ/WOlaenaaUtI/AAAAAAAABlc/FeaitLc4H-MPx-dj1gD9XkOaeQAeNGWUQCLcB/s1600/p29095_p_v8_ak.jpg"
-						alt="Imagem de capa do card">
-					<div class="card-body">
-						<h5 class="card-title">Lilo & Stitch</h5>
-						<p class="card-text">Comédia</p>
-						<a href="" class="btn btn-warning">Sinopse</a>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-4 mb-4">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top"
-						src="https://www.themoviedb.org/t/p/original/urFzh1shUnJCzc6eI7MqV4RsJWP.jpg"
-						alt="Imagem de capa do card">
-					<div class="card-body">
-						<h5 class="card-title">Rio 2</h5>
-						<p class="card-text">Comédia</p>
-						<a href="#" class="btn btn-warning">Sinopse</a>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-4 mb-4">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top"
-						src="https://br.web.img2.acsta.net/pictures/23/01/10/16/05/4289829.jpg"
-						alt="Imagem de capa do card">
-					<div class="card-body">
-						<h5 class="card-title">Homem-formiga e a Vespa: Quantomania</h5>
-						<p class="card-text">Comédia</p>
-						<a href="#" class="btn btn-warning">Sinopse</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	#{doLayout /}
-
-	<footer class="footer text-faded text-center py-5">
-		<div class="container">
-			<p class="m-0 small">Feito com carinho por: Antônio Vitor, Ellen
-				Iris e Mel Elói ♡</p>
-		</div>
-	</footer>
-	<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}"
-		type="text/javascript" charset="${_response_encoding}"></script>
-	#{get 'moreScripts' /}
+    <footer class="footer text-faded text-center py-5">
+        <div class="container">
+            <p class="m-0 small">Feito com carinho por: Antônio Vitor, Ellen
+                Iris e Mel Elói ♡</p>
+        </div>
+    </footer>
+    <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}"
+        type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    #{get 'moreScripts' /}
 </body>
 </html>

@@ -12,16 +12,19 @@ import security.Administrador;
 
 public class Usuarios extends Controller {
 
-    // Este método é PÚBLICO e renderiza o formulário de cadastro.
     public static void form() {
-        List<Filme> filmes = Filme.findAll();
-        render(filmes);
+        // --- INÍCIO DA MODIFICAÇÃO ---
+        // A linha que busca todos os filmes foi removida, pois não é mais necessária aqui.
+        // List<Filme> filmes = Filme.findAll();
+        render(); // Agora o render é chamado sem passar a lista de filmes.
+        // --- FIM DA MODIFICAÇÃO ---
     }
 
-    // Este método também é PÚBLICO para permitir que novos usuários se cadastrem.
+    // O método 'salvar' não precisa de alterações. Se o campo não vem do formulário,
+    // o Play simplesmente não tentará associar nenhum filme, o que é o comportamento desejado.
     @Administrador
     public static void salvar(Usuario u, String confirmacaoSenha) {
-        // Validação da senha
+        // ... (código de validação da senha continua o mesmo)
         if (u.id == null || (u.senha != null && !u.senha.isEmpty())) {
             validation.required("Senha", u.senha);
             validation.equals("confirmacaoSenha", u.senha, "Confirmação de Senha", confirmacaoSenha).message("As senhas não conferem.");
@@ -31,11 +34,13 @@ public class Usuarios extends Controller {
                 u.senha = usuarioDB.senha;
             }
         }
-
+        
         if (validation.hasErrors()) {
-            List<Filme> filmes = Filme.findAll();
-            flash.error("Verifique os erros no formulário.");
-            renderTemplate("Usuarios/form.html", u, filmes);
+            // --- MODIFICAÇÃO AQUI TAMBÉM ---
+            // Se a validação falhar, precisamos renderizar o formulário novamente.
+            // Como o formulário não usa mais a variável 'filmes', não precisamos buscá-la.
+            renderTemplate("Usuarios/form.html", u);
+            // --- FIM DA MODIFICAÇÃO ---
         }
 
         if (u.nome != null) {
@@ -49,9 +54,8 @@ public class Usuarios extends Controller {
 
         if (u.id == null) {
              flash.success("Cadastro realizado com sucesso! Faça o login.");
-             Index.form(); 
+             Index.form();
         } else {
-            // Se for uma edição, redireciona para a lista de filmes.
             flash.success("Usuário salvo com sucesso!");
             Filmes.listar();
         }
@@ -72,7 +76,8 @@ public class Usuarios extends Controller {
     }
 
     @Administrador
-    public static void detalhar(Usuario u) {
+    public static void detalhar(Long id) {
+        Usuario u = Usuario.findById(id);
         render(u);
     }
 
@@ -80,8 +85,11 @@ public class Usuarios extends Controller {
     @Administrador
     public static void editar(Long id) {
         Usuario u = Usuario.findById(id);
-        List<Filme> filmes = Filme.findAll();
-        renderTemplate("Usuarios/form.html", u, filmes);
+        // --- INÍCIO DA MODIFICAÇÃO ---
+        // A linha que busca todos os filmes foi removida aqui também.
+        // List<Filme> filmes = Filme.findAll();
+        renderTemplate("Usuarios/form.html", u);
+        // --- FIM DA MODIFICAÇÃO ---
     }
 
     @Administrador

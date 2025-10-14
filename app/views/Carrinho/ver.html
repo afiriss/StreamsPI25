@@ -25,7 +25,7 @@
                         <td>R$ ${item.filme.preco}</td>
                         <td>${item.quantidade}</td>
                         <td>R$ ${item.getSubtotal()}</td>
-                        <td><a href="@{Carrinho.remover(item.filme.id)}" class="btn btn-danger btn-sm">Remover</a></td>
+                        <td><a href="@{Carrinho.remover(item.id)}" class="btn btn-danger btn-sm">Remover</a></td>
                     </tr>
                 #{/list}
             </tbody>
@@ -39,6 +39,6 @@
         </div>
     #{/else}
     <div>
-         <a href="@{Application.listarLivros()}" class="btn btn-secondary">Continuar Comprando</a>
+         <a href="@{Filmes.listar()}" class="btn btn-secondary">Continuar Comprando</a>
     </div>
 </div>

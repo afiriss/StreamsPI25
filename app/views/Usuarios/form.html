@@ -1,20 +1,31 @@
-#{extends 'main.html' /} #{if u} #{set title:'Edição de Usuario' /}
-#{/if} #{else} #{set titlt:'Cadastro de Usuario' /} #{/else}
+#{extends 'main.html' /}
+#{set title: u?.id ? 'Edição de Usuario' : 'Cadastro de Usuario' /}
 
-<form action="@{Usuarios.salvar}" style="color: white;">
+<form action="@{Usuarios.salvar}" method="POST" style="color: white;">
 	<input type="hidden" name="u.id" value="${u?.id}">
-	<h1>Cadastro de Usuario:</h1>
+	<h1>${u?.id ? 'Editar Usuário' : 'Cadastro de Usuario:'}</h1>
+
+    #{ifErrors}
+        <div class="alert alert-danger">
+            <p>Por favor, corrija os erros abaixo:</p>
+            <ul>
+                #{errors}
+                    <li>${error}</li>
+                #{/errors}
+            </ul>
+        </div>
+    #{/ifErrors}
 
 	<div class="mb-3">
-		<label class="form-label">Nome:</label> <input class="form-control"
-			type="text" name="u.nome" value="${u?.nome}">
+		<label class="form-label">Nome:</label>
+        <input class="form-control" type="text" name="u.nome" value="${u?.nome}">
 	</div>
 
 	<div class="mb-3">
-		<label class="form-label">E-mail:</label> <input class="form-control"
-			type="text" name="u.email" value="${u?.email}">
+		<label class="form-label">E-mail:</label>
+        <input class="form-control" type="text" name="u.email" value="${u?.email}">
 	</div>
-	
+
 	<div>
 	    <label class="form-label">Senha:</label>
 	    <input class="form-control" type="password" name="u.senha" value="">
@@ -22,28 +33,19 @@
 	        <small class="form-text text-muted">Deixe em branco para não alterar a senha.</small>
 	    #{/if}
 	</div>
-	
+
 	<div>
-		<label class="form-label">Confirme a senha:</label> 
+		<label class="form-label">Confirme a senha:</label>
 		<input class="form-control" type="password" name="confirmacaoSenha" value="">
+        <span style="color: #dc3545; font-size: 0.875em;">
+            #{error 'confirmacaoSenha' /}
+        </span>
 	</div>
 
-	  <div class="mb-3">
+	<div class="mb-3">
         <label class="form-label">Telefone:</label>
         <input class="form-control" type="text" name="u.telefone" value="${u?.telefone}">
     </div>
 
-<!--  
-    <div class="mb-3">
-        <label class="form-label">Filme Favorito:</label>
-        <select class="form-select" name="u.filme.id">
-            #{list items:filmes, as:'f'}
-                <option value="${f.id}" ${f.id==u?.filme?.id?'selected' : ''}>
-                    ${f.nome}
-                </option>
-            #{/list}
-        </select>
-    </div>
--->
     <input class="btn btn-primary" type="submit" value="${u?.id ? 'Salvar Alterações':'Cadastrar'}">
 </form>

@@ -42,6 +42,6 @@ public class Logins extends Controller{
 	    public static void logout() {
 	        session.clear();
 	        flash.success("Você saiu do sistema!");
-	        form();
+	       Application.index();
 	    }
 	}
