@@ -30,6 +30,9 @@
                         #{if session.contains('usuarioLogado')}
                             <li class="nav-item"><a class="nav-link" href="@{Filmes.listar()}">Catálogo</a></li>
                             <li class="nav-item"><a class="nav-link" href="@{Carrinho.ver()}">Carrinho</a></li>
+                        #{if usuario?.perfil == models.Perfil.ADMINISTRADOR}
+                            <li class="nav-item"><a class="nav-link" href="@{Usuarios.listar()}">Listar Usuários</a></li>
+                                #{/if}
                             <li class="nav-item"><a class="nav-link" href="@{Logins.logout()}">Sair</a></li>
                         #{/if}
                         #{else}

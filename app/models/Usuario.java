@@ -40,7 +40,7 @@ public class Usuario extends Model{
 	
 	public Usuario() {
 		this.status = Status.ATIVO;
-		this.perfil = Perfil.ADMINISTRADOR;
+		this.perfil = Perfil.ASSISTENTE;
 		this.filmes = new ArrayList<>();
 		this.carrinho = new ArrayList<>();
 	}

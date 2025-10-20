@@ -1,6 +1,7 @@
 package jobs;
 
 import models.Filme;
+import models.Perfil;
 import models.Usuario;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
@@ -31,5 +32,17 @@ public class Inicializador extends Job {
 			new Filme("João e Maria: Caçadores de Bruxas", "terror", 44.0, "filmes/joaoemaria.jpg").save();
 
 		}
+		
+		if (Usuario.count("byEmail", "ADMIN@EMAIL.COM") == 0) {
+            Usuario admin = new Usuario();
+            admin.nome = "ADMINISTRADOR";
+            admin.email = "ADM@EMAIL.COM";
+            // É recomendável usar um hash para a senha em produção
+            // Exemplo simples (não ideal para produção):
+            admin.senha = "123a123b"; // Troque por uma senha segura
+            admin.perfil = Perfil.ADMINISTRADOR;
+            admin.status = models.Status.ATIVO; // Garantir que está ativo
+            admin.save();
+        }
 	}
 }
