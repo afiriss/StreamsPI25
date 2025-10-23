@@ -1,5 +1,5 @@
 #{extends 'main.html' /}
-#{set title:'listar' /}
+#{set title:'Listar Usuários' /}
 
 <div class="search-label-container">
   <label for="termo">Buscar por nome ou email:</label>
@@ -7,34 +7,51 @@
 
 <div class="search-container">
   <form action="@{Usuarios.listar}" class="search-form-inside">
-    <input 
+    <input
       id="termo"
-      type="text" 
-      name="termo" 
-      value="${termo}" 
-      placeholder="Digite nome ou email" 
+      type="text"
+      name="termo"
+      value="${termo}"
+      placeholder="Digite nome ou email"
       class="search-input" />
-    <button type="submit" class="search-button">Enviar</button>
+    <button type="submit" class="search-button">Buscar</button>
   </form>
 </div>
 
-<div class="user-cards-container">
-  #{list items: usuarios, as:'u'}
-    <div class="user-card">
-      <p><strong>Nome:</strong> ${u.nome}</p>
-      <p><strong>Email:</strong> ${u.email}</p>
-      <p><strong>Telefone:</strong> ${u.telefone}</p>
-      <div class="button-group">
-        <a href="@{Usuarios.editar(u.id)}" class="action-button">Editar</a>
-        <a href="@{Usuarios.remover(u.id)}" class="action-button">Remover</a>
-      </div>
-    </div>
-  #{/list}
+<div class="user-table-container">
+  #{if usuarios && usuarios.size() > 0}
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Telefone</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        #{list items: usuarios, as:'u'}
+          <tr>
+            <td>${u.nome}</td>
+            <td>${u.email}</td>
+            <td>${u.telefone ?: '-'}</td> <td>
+              <div class="button-group">
+                <a href="@{Usuarios.editar(u.id)}" class="action-button">Editar</a>
+                <a href="@{Usuarios.remover(u.id)}"
+                   onclick="return confirm('Tem certeza que deseja remover ${u.nome}?');"
+                   class="action-button">Remover</a>
+              </div>
+            </td>
+          </tr>
+        #{/list}
+      </tbody>
+    </table>
+  #{/if}
   #{else}
-    <p class="no-users">Nenhuma Pessoa Cadastrada</p>
+    <p class="no-users">Nenhuma Pessoa Cadastrada#{if termo} correspondendo a "${termo}"#{/if}.</p>
   #{/else}
 </div>
 
 <div style="text-align: center; margin-top: 2rem;">
-  <a href="@{Usuarios.form}" class="action-button">Cadastrar Novo</a>
+  <a href="@{Usuarios.form}" class="action-button">Cadastrar Novo Usuário</a>
 </div>
