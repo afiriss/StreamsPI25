@@ -227,3 +227,206 @@ form h1 {
 .table td, .table th {
     border-top: 1px solid #33364a;
 }
+
+/* =================================================================== */
+/* Estilos Específicos para Usuarios/listar.html */
+/* =================================================================== */
+
+/* --- Área de Busca --- */
+.search-label-container {
+    max-width: 600px; /* Largura similar à tabela */
+    margin: 0 auto 0.5rem auto; /* Centraliza e adiciona margem inferior */
+    padding-left: 10px; /* Pequeno ajuste de alinhamento */
+}
+
+.search-label-container label {
+    color: #a0a0a0; /* Cor cinza claro para o label */
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.search-container {
+    max-width: 400px; /* Reduzido de 600px para 450px (ou outro valor menor que preferir) */
+    margin: 0 auto 2.5rem auto;
+    background-color: #191b29;
+    padding: 0px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+.search-form-inside {
+    display: flex; /* Alinha input e botão lado a lado */
+    gap: 10px; /* Espaço entre input e botão */
+    align-items: center; /* Alinha verticalmente */
+}
+
+.search-input {
+    flex-grow: 1; /* Faz o input ocupar o espaço disponível */
+    background-color: #33364a; /* Fundo do input */
+    border: 1px solid #33364a;
+    color: #f9f9f9; /* Texto branco */
+    border-radius: 4px;
+    padding: 12px 15px; /* Ajusta padding */
+    font-size: 1rem;
+}
+
+.search-input::placeholder {
+    color: #a0a0a0; /* Cor do placeholder */
+}
+
+.search-input:focus {
+    background-color: #33364a;
+    color: #f9f9f9;
+    border-color: #a787ff; /* Roxo claro no foco */
+    box-shadow: none;
+    outline: none;
+}
+
+.search-button {
+    background: linear-gradient(to right, #6a48ff, #9d7bff); /* Gradiente roxo */
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 20px; /* Ajusta padding */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: filter 0.3s;
+    flex-shrink: 0; /* Impede que o botão encolha */
+}
+
+.search-button:hover {
+    filter: brightness(1.2);
+    color: #fff;
+}
+
+
+/* --- Tabela de Usuários --- */
+.user-table-container {
+    max-width: 800px; /* Aumenta um pouco a largura da tabela */
+    margin: 2rem auto; /* Centraliza e adiciona margem vertical */
+    background-color: #191b29; /* Fundo escuro para a área da tabela */
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    overflow-x: auto; /* Adiciona scroll horizontal se necessário em telas pequenas */
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse; /* Remove espaços entre células */
+    color: #f9f9f9; /* Texto branco */
+    margin-bottom: 1.5rem; /* Espaço abaixo da tabela */
+}
+
+.user-table thead th {
+    background-color: #33364a; /* Fundo do cabeçalho */
+    color: #a787ff; /* Cor roxa para o texto do cabeçalho */
+    padding: 12px 15px;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #a787ff; /* Borda inferior roxa */
+}
+
+.user-table tbody tr {
+    border-bottom: 1px solid #33364a; /* Linha sutil entre as linhas */
+    transition: background-color 0.2s ease;
+}
+
+.user-table tbody tr:last-child {
+    border-bottom: none; /* Remove a borda da última linha */
+}
+
+.user-table tbody tr:hover {
+    background-color: #2a2d3d; /* Cor de fundo no hover */
+}
+
+.user-table td {
+    padding: 12px 15px;
+    vertical-align: middle; /* Alinha o conteúdo verticalmente */
+}
+
+.user-table td:last-child {
+    text-align: right; /* Alinha os botões à direita */
+}
+
+/* --- Botões de Ação na Tabela --- */
+.button-group {
+    display: flex;
+    gap: 8px; /* Espaço entre os botões */
+    justify-content: flex-end; /* Alinha botões à direita */
+}
+
+.action-button { /* Estilo base para os links parecerem botões */
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.2s;
+    border: 1px solid transparent;
+}
+
+/* Botão Editar (estilo secundário) */
+.action-button[href*="editar"] {
+    background-color: #4a4e69; /* Cinza-azulado */
+    border-color: #4a4e69;
+    color: #f9f9f9;
+}
+
+.action-button[href*="editar"]:hover {
+    background-color: #5f6380;
+    border-color: #5f6380;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* Botão Remover (estilo perigo) */
+.action-button[href*="remover"] {
+    background-color: #c9184a; /* Rosa escuro/vermelho */
+    border-color: #c9184a;
+    color: #f9f9f9;
+}
+
+.action-button[href*="remover"]:hover {
+    background-color: #e01e5a;
+    border-color: #e01e5a;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* --- Mensagem "Nenhum Usuário" --- */
+p.no-users {
+    text-align: center;
+    color: #a0a0a0; /* Cinza claro */
+    margin-top: 2rem;
+    font-style: italic;
+}
+
+/* --- Botão "Cadastrar Novo Usuário" --- */
+/* (Reutiliza o estilo .action-button, mas com cores primárias) */
+a.action-button[href*="form"] {
+    background: linear-gradient(to right, #6a48ff, #9d7bff); /* Mesmo gradiente do search */
+    color: #fff;
+    border: none;
+    padding: 10px 20px; /* Maior padding */
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+a.action-button[href*="form"]:hover {
+    filter: brightness(1.2);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(106, 72, 255, 0.3); /* Sombra roxa no hover */
+}
+
+/* Centralização do botão Cadastrar (já feito no HTML, mas garantindo) */
+div[style*="text-align: center"] {
+    text-align: center;
+}
