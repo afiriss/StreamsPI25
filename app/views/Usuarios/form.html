@@ -8,7 +8,9 @@
     #{ifErrors}
         <div class="alert alert-danger">
             #{errors}
-                <li>${error}</li>
+                #{if error.key != 'u'}
+                    <li>${error}</li>
+                #{/if}
             #{/errors}
         </div>
     #{/ifErrors}
