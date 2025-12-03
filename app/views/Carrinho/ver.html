@@ -45,75 +45,69 @@
 
 #{set 'moreScripts'}
     <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-            // --- FUNÇÃO AUXILIAR: Transição para Carrinho Vazio ---
-            // Chamada quando limpamos tudo ou removemos o último item
-            function mostrarCarrinhoVazio() {
-                // Esconde a tabela, o total e os botões de ação
-                $('table.table, h3, .btn-warning, .btn-success').fadeOut(300, function() {
-                    $(this).remove();
-                });
-
-                // Verifica se a mensagem já existe para não duplicar
-                if ($('.alert-info').length === 0) {
-                    $('.container h1').after('<p class="alert alert-info mt-3">Seu carrinho está vazio.</p>');
-                }
+        // Função visual para carrinho vazio
+        function mostrarVazio() {
+            $('table.table, h3, .btn-warning, .btn-success').fadeOut();
+            if ($('.alert-info').length === 0) {
+                $('.container h1').after('<p class="alert alert-info mt-3">Seu carrinho está vazio.</p>');
             }
+            $('#contador-carrinho').text("");
+        }
 
-            // --- AÇÃO 1: Remover Item Específico ---
-            $('.btn-remover-item').live('click', function(e) {
-                e.preventDefault();
-                
-                var botao = $(this);
-                var url = botao.attr('href');
-                var linha = botao.closest('tr');
+        // AÇÃO: Remover/Decrementar
+        $('.btn-remover-item').unbind('click').click(function(e) {
+            e.preventDefault();
+            var botao = $(this);
+            var linha = botao.closest('tr');
+            
+            // Células para atualizar
+            var celulaQtd = linha.find('td').eq(2);
+            var celulaSub = linha.find('td').eq(3);
+            var tituloTotal = $('h3'); // Onde mostra o total R$
 
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    success: function() {
+            $.ajax({
+                url: botao.attr('href'),
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    // 1. Atualiza contador do menu
+                    var count = data.totalItens > 0 ? data.totalItens : "";
+                    $('#contador-carrinho').text(count);
+
+                    // 2. Atualiza valor total da compra
+                    tituloTotal.text('Total: R$ ' + data.valorTotalCompra.toFixed(2).replace('.', ','));
+
+                    if (data.removido) {
+                        // Se removeu a linha inteira
                         linha.fadeOut(300, function() {
                             $(this).remove();
-                            
-                            // Verifica quantos itens sobraram
-                            // Se não houver mais linhas no corpo da tabela, mostra "Vazio"
-                            if ($('table tbody tr').length === 0) {
-                                mostrarCarrinhoVazio();
-                            }
+                            if ($('table tbody tr').length === 0) mostrarVazio();
                         });
-                    },
-                    error: function() {
-                        alert("Erro ao remover o item. Tente recarregar a página.");
+                    } else {
+                        // Se só diminuiu a quantidade
+                        celulaQtd.text(data.novaQtd);
+                        celulaSub.text('R$ ' + data.novoSubtotal.toFixed(2).replace('.', ','));
                     }
-                });
-            });
-
-            // --- AÇÃO 2: Limpar Todo o Carrinho ---
-            $('#btn-limpar').click(function(e) {
-                e.preventDefault();
-
-                if (!confirm("Tem certeza que deseja esvaziar todo o carrinho?")) {
-                    return;
                 }
-
-                var url = $(this).attr('href');
-
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    success: function() {
-                        // Chama a mesma função auxiliar para esconder tudo
-                        mostrarCarrinhoVazio();
-                    },
-                    error: function() {
-                        alert("Erro ao limpar o carrinho.");
-                    }
-                });
             });
-
         });
-    </script>
+
+        // AÇÃO: Limpar tudo (mantido simples)
+        $('#btn-limpar').click(function(e) {
+            e.preventDefault();
+            if(!confirm("Esvaziar carrinho?")) return;
+            
+            $.ajax({
+                url: $(this).attr('href'),
+                success: function() {
+                    mostrarVazio();
+                }
+            });
+        });
+    });
+</script>
+    
 #{/set}

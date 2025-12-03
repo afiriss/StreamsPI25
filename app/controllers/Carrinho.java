@@ -1,6 +1,8 @@
 package controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import models.CarrinhoItem;
 import models.Filme;
@@ -8,115 +10,136 @@ import models.Usuario;
 import play.mvc.Controller;
 import play.mvc.With;
 
-
 @With(Seguranca.class)
 public class Carrinho extends Controller {
-	// Método para buscar o usuário que está logado na sessão atual
-	private static Usuario getUsuarioLogado() {
-		String emailUsuario = session.get("usuarioLogado");
-		if (emailUsuario == null) {
-			return null;
-		}
-		Usuario u = Usuario.find("byEmail", emailUsuario).first();
-	    // Se não encontrar o utilizador na base de dados, mas tinha sessão, forçar logout
-	    if (u == null) {
-	        session.clear();
-	        Logins.form();
-	    }
-	    return u;
-	}
 
-	public static void adicionar(long id) {
-		Usuario usuarioLogado = getUsuarioLogado();
-		Filme filmeParaAdicionar = Filme.findById(id);
+    private static Usuario getUsuarioLogado() {
+        String emailUsuario = session.get("usuarioLogado");
+        if (emailUsuario == null) return null;
+        Usuario u = Usuario.find("byEmail", emailUsuario).first();
+        if (u == null) {
+            session.clear();
+            Logins.form();
+        }
+        return u;
+    }
 
-		if (usuarioLogado != null && filmeParaAdicionar != null) {
-			// verifica se o filme já está no carrinho do usuario
-			CarrinhoItem itemExistente = null;
-			for (CarrinhoItem item : usuarioLogado.carrinho) {
-				if (item.filme.id.equals(id)) {
-					itemExistente = item;
-					break;
-				}
-			}
+    // Método auxiliar para contar itens totais do usuário
+    private static int contarItensTotal(Usuario u) {
+        int total = 0;
+        if (u != null && u.carrinho != null) {
+            for (CarrinhoItem item : u.carrinho) {
+                total += item.quantidade;
+            }
+        }
+        return total;
+    }
 
-			if (itemExistente != null) {
-				// se já existe, apenas incrementa a quant
-				itemExistente.quantidade++;
-				itemExistente.save(); // salva a alteração no item
-			}else {
-				// se não exite, cria um novo item no carrinho
-				CarrinhoItem novoItem = new CarrinhoItem(usuarioLogado, filmeParaAdicionar, 1);
-				// novoItem.usuario = usuarioLogado;
-				 usuarioLogado.carrinho.add(novoItem); // Adiciona na lista do usuário
-	                usuarioLogado.save(); // Salva o usuário, o que também salva o novo item por causa do 'cascade'
-	            }
-			
-	        }
-		
-		if(request.isAjax()) {
-			renderText("Filme adicionado ao carrinho com sucesso!");
-		}
-		if (usuarioLogado == null) return;
-	        // Redireciona para a tela que mostra o carrinho
-	        ver();
-	    }
+    public static void adicionar(long id) {
+        Usuario usuarioLogado = getUsuarioLogado();
+        Filme filme = Filme.findById(id);
 
-	    public static void ver() {
-	        Usuario usuarioLogado = getUsuarioLogado();
-	        if (usuarioLogado == null) {
-	            // Se a sessão existir mas o utilizador não estiver no banco, limpa a sessão e redireciona
-	            session.clear();
-	            flash.error("Sessão inválida. Faça login novamente.");
-	            Logins.form();
-	            return; // Interrompe a execução
-	        }
-	        List<CarrinhoItem> itens = usuarioLogado.carrinho;
+        if (usuarioLogado != null && filme != null) {
+            CarrinhoItem itemExistente = null;
+            for (CarrinhoItem item : usuarioLogado.carrinho) {
+                if (item.filme.id.equals(id)) {
+                    itemExistente = item;
+                    break;
+                }
+            }
 
-	        double total = 0;
-	        for (CarrinhoItem item : itens) {
-	            total += item.getSubtotal();
-	        }
+            if (itemExistente != null) {
+                itemExistente.quantidade++;
+                itemExistente.save();
+            } else {
+                CarrinhoItem novoItem = new CarrinhoItem(usuarioLogado, filme, 1);
+                usuarioLogado.carrinho.add(novoItem);
+                usuarioLogado.save();
+            }
+        }
 
-	        if (usuarioLogado == null) return;
-	        render(itens, total);
-	    }
+        if (request.isAjax()) {
+            // Retorna JSON com mensagem e o novo total para o contador
+            Map<String, Object> json = new HashMap<String, Object>();
+            json.put("mensagem", "Filme adicionado com sucesso!");
+            json.put("totalItens", contarItensTotal(usuarioLogado));
+            renderJSON(json);
+        }
+        
+        if (usuarioLogado == null) return;
+        ver();
+    }
 
-	    public static void remover(Long idDoItem) {
-	        Usuario usuarioLogado = getUsuarioLogado();
-	        CarrinhoItem itemParaRemover = CarrinhoItem.findById(idDoItem);
+    public static void remover(Long idDoItem) {
+        Usuario usuarioLogado = getUsuarioLogado();
+        CarrinhoItem item = CarrinhoItem.findById(idDoItem);
 
-	        // Verifica se o item existe e se realmente pertence ao usuário logado (segurança)
-	        if (itemParaRemover != null && itemParaRemover.usuario.id.equals(usuarioLogado.id)) {
-	            usuarioLogado.carrinho.remove(itemParaRemover); // Remove da lista
-	            usuarioLogado.save(); // Salva a alteração no usuário
-	            itemParaRemover.delete(); // Deleta o item do banco de dados
-	        }
-	        if (request.isAjax()) {
-	            renderText("Item removido");
-	        } else {
-	            ver();
-	        }
-	        if (usuarioLogado == null) return;
-	    }
+        if (usuarioLogado == null || item == null) return;
 
-	    public static void limpar() {
-	        Usuario usuarioLogado = getUsuarioLogado();
-	        // Para cada item, deleta ele do banco
-	        for (CarrinhoItem item : usuarioLogado.carrinho) {
-	            item.delete();
-	        }
-	        usuarioLogado.carrinho.clear(); // Limpa a lista na memória
-	        usuarioLogado.save(); // Salva o usuário com a lista de carrinho vazia
-	        
-	        if (request.isAjax()) {
-	            renderText("Carrinho limpo");
-	        } else {
-	            ver();
-	        }
-	        if (usuarioLogado == null) return;
-	    }
-	}
+        boolean foiRemovidoTotalmente = false;
 
-//@Valid lembrar pra que serve (se não, não vai rodar)
-//Só caso precisemos 
+        // LÓGICA DE DECREMENTO
+        if (item.quantidade > 1) {
+            item.quantidade--;
+            item.save();
+        } else {
+            usuarioLogado.carrinho.remove(item);
+            usuarioLogado.save();
+            item.delete();
+            foiRemovidoTotalmente = true;
+        }
+
+        // Calcula novo valor total da compra (R$)
+        double valorTotalCompra = 0;
+        for (CarrinhoItem i : usuarioLogado.carrinho) {
+            valorTotalCompra += i.getSubtotal();
+        }
+
+        if (request.isAjax()) {
+            Map<String, Object> json = new HashMap<String, Object>();
+            json.put("removido", foiRemovidoTotalmente);
+            json.put("totalItens", contarItensTotal(usuarioLogado)); // Para atualizar o menu
+            json.put("valorTotalCompra", valorTotalCompra); // Para atualizar o total R$
+            
+            if (!foiRemovidoTotalmente) {
+                json.put("novaQtd", item.quantidade);
+                json.put("novoSubtotal", item.getSubtotal());
+            }
+            renderJSON(json);
+        } else {
+            ver();
+        }
+    }
+
+    public static void ver() {
+        Usuario usuarioLogado = getUsuarioLogado();
+        if (usuarioLogado == null) {
+            session.clear();
+            Logins.form();
+            return;
+        }
+        List<CarrinhoItem> itens = usuarioLogado.carrinho;
+        double total = 0;
+        for (CarrinhoItem item : itens) {
+            total += item.getSubtotal();
+        }
+        render(itens, total);
+    }
+
+    public static void limpar() {
+        Usuario usuarioLogado = getUsuarioLogado();
+        if (usuarioLogado != null) {
+            for (CarrinhoItem item : usuarioLogado.carrinho) {
+                item.delete();
+            }
+            usuarioLogado.carrinho.clear();
+            usuarioLogado.save();
+        }
+        
+        if (request.isAjax()) {
+            renderText("Carrinho limpo");
+        } else {
+            ver();
+        }
+    }
+}

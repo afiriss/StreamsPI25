@@ -100,4 +100,37 @@
             });
         });
     </script>
+    <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // .unbind garante que não haja múltiplos eventos presos ao mesmo botão
+        $('.btn-add-cart').unbind('click').click(function(e) {
+            e.preventDefault();
+            var botao = $(this);
+            
+            // Evita duplo clique rápido desabilitando o botão temporariamente
+            if (botao.hasClass('disabled')) return;
+            botao.addClass('disabled');
+
+            $.ajax({
+                url: botao.attr('href'),
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    alert(data.mensagem);
+                    
+                    // Atualiza o contador lá em cima no menu
+                    var count = data.totalItens > 0 ? data.totalItens : "";
+                    $('#contador-carrinho').text(count);
+                    
+                    botao.removeClass('disabled');
+                },
+                error: function() {
+                    alert("Erro ao adicionar.");
+                    botao.removeClass('disabled');
+                }
+            });
+        });
+    });
+</script>
 #{/set}

@@ -4,18 +4,6 @@
    <div class="container">
        <h1>Login</h1>
 
-       #{if flash.error}
-           <div class="alert alert-danger">
-               ${flash.error}
-           </div>
-       #{/if}
-
-       #{if flash.success}
-           <div class="alert alert-success">
-               ${flash.success}
-           </div>
-       #{/if}
-
        <form action="@{Logins.logar()}" method="post">
            <div class="form-group">
                <label for="email">Email:</label>

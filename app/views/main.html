@@ -30,7 +30,17 @@
                         #{if session.contains('usuarioLogado')}
                         
                             <li class="nav-item"><a class="nav-link" href="@{Filmes.listar()}">Catálogo</a></li>
-                            <li class="nav-item"><a class="nav-link" href="@{Carrinho.ver()}">Carrinho</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@{Carrinho.ver()}">Carrinho<span id="contador-carrinho" class="badge bg-secondary rounded-pill" style="margin-left: 5px;">
+            #{if usuario && usuario.carrinho}
+                %{ 
+                   int qtdTotal = 0;
+                   for(models.CarrinhoItem item : usuario.carrinho) { qtdTotal += item.quantidade; } 
+                   out.print(qtdTotal > 0 ? qtdTotal : ""); 
+                }%
+            #{/if}
+        </span>
+    </a>
+</li>
                         #{if usuario?.perfil == models.Perfil.ADMINISTRADOR}
                             <li class="nav-item"><a class="nav-link" href="@{Usuarios.listar()}">Listar Usuários</a></li>
                                 #{/if}
