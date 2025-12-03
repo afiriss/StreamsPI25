@@ -17,7 +17,13 @@ public class Carrinho extends Controller {
 		if (emailUsuario == null) {
 			return null;
 		}
-		return Usuario.find("byEmail", emailUsuario).first();
+		Usuario u = Usuario.find("byEmail", emailUsuario).first();
+	    // Se não encontrar o utilizador na base de dados, mas tinha sessão, forçar logout
+	    if (u == null) {
+	        session.clear();
+	        Logins.form();
+	    }
+	    return u;
 	}
 
 	public static void adicionar(long id) {
@@ -45,17 +51,26 @@ public class Carrinho extends Controller {
 				 usuarioLogado.carrinho.add(novoItem); // Adiciona na lista do usuário
 	                usuarioLogado.save(); // Salva o usuário, o que também salva o novo item por causa do 'cascade'
 	            }
+			
 	        }
 		
 		if(request.isAjax()) {
 			renderText("Filme adicionado ao carrinho com sucesso!");
 		}
+		if (usuarioLogado == null) return;
 	        // Redireciona para a tela que mostra o carrinho
 	        ver();
 	    }
 
 	    public static void ver() {
 	        Usuario usuarioLogado = getUsuarioLogado();
+	        if (usuarioLogado == null) {
+	            // Se a sessão existir mas o utilizador não estiver no banco, limpa a sessão e redireciona
+	            session.clear();
+	            flash.error("Sessão inválida. Faça login novamente.");
+	            Logins.form();
+	            return; // Interrompe a execução
+	        }
 	        List<CarrinhoItem> itens = usuarioLogado.carrinho;
 
 	        double total = 0;
@@ -63,6 +78,7 @@ public class Carrinho extends Controller {
 	            total += item.getSubtotal();
 	        }
 
+	        if (usuarioLogado == null) return;
 	        render(itens, total);
 	    }
 
@@ -76,7 +92,12 @@ public class Carrinho extends Controller {
 	            usuarioLogado.save(); // Salva a alteração no usuário
 	            itemParaRemover.delete(); // Deleta o item do banco de dados
 	        }
-	        ver();
+	        if (request.isAjax()) {
+	            renderText("Item removido");
+	        } else {
+	            ver();
+	        }
+	        if (usuarioLogado == null) return;
 	    }
 
 	    public static void limpar() {
@@ -89,11 +110,11 @@ public class Carrinho extends Controller {
 	        usuarioLogado.save(); // Salva o usuário com a lista de carrinho vazia
 	        
 	        if (request.isAjax()) {
-	            renderText("Carrinho limpo com sucesso!");
+	            renderText("Carrinho limpo");
 	        } else {
-	            // Comportamento padrão (sem JS): recarrega a página
 	            ver();
 	        }
+	        if (usuarioLogado == null) return;
 	    }
 	}
 
