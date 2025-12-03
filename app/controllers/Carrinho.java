@@ -46,6 +46,10 @@ public class Carrinho extends Controller {
 	                usuarioLogado.save(); // Salva o usuário, o que também salva o novo item por causa do 'cascade'
 	            }
 	        }
+		
+		if(request.isAjax()) {
+			renderText("Filme adicionado ao carrinho com sucesso!");
+		}
 	        // Redireciona para a tela que mostra o carrinho
 	        ver();
 	    }
@@ -83,7 +87,13 @@ public class Carrinho extends Controller {
 	        }
 	        usuarioLogado.carrinho.clear(); // Limpa a lista na memória
 	        usuarioLogado.save(); // Salva o usuário com a lista de carrinho vazia
-	        ver();
+	        
+	        if (request.isAjax()) {
+	            renderText("Carrinho limpo com sucesso!");
+	        } else {
+	            // Comportamento padrão (sem JS): recarrega a página
+	            ver();
+	        }
 	    }
 	}
 

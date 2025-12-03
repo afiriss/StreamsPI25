@@ -34,7 +34,7 @@
         <h3>Total: R$ ${total}</h3>
 
         <div>
-            <a href="@{Carrinho.limpar()}" class="btn btn-warning">Limpar Carrinho</a>
+            <a href="@{Carrinho.limpar()}" id="btn-limpar" class="btn btn-warning" >Limpar Carrinho</a>
             <a href="@{Pedidos.finalizar()}" class="btn btn-success">Finalizar Compra</a>
         </div>
     #{/else}
@@ -42,3 +42,46 @@
          <a href="@{Filmes.listar()}" class="btn btn-secondary">Continuar Comprando</a>
     </div>
 </div>
+
+#{set 'moreScripts'}
+    <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            
+            $('#btn-limpar').click(function(e) {
+                e.preventDefault(); // 1. Impede o recarregamento da página
+
+                if(!confirm("Tem certeza que deseja remover todos os itens?")) {
+                    return;
+                }
+
+                var url = $(this).attr('href');
+                
+                // 2. Requisição AJAX
+                $.ajax({
+                    url: url,
+                    success: function(resposta) {
+                        // 3. Atualiza a interface visualmente
+                        
+                        // Remove a tabela de produtos
+                        $('table.table').fadeOut(300, function(){ $(this).remove(); });
+                        
+                        // Remove o total (h3) e a div que contém os botões de ação
+                        $('h3').fadeOut(300, function(){ $(this).remove(); });
+                        $('#btn-limpar').parent().fadeOut(300, function(){ $(this).remove(); });
+
+                        // Insere a mensagem de "Carrinho vazio" logo após o título h1
+                        $('.container h1').after('<p class="alert alert-info mt-3">Seu carrinho está vazio.</p>');
+
+                        // Feedback opcional
+                        // alert(resposta); 
+                    },
+                    error: function() {
+                        alert("Erro ao limpar o carrinho.");
+                    }
+                });
+            });
+        });
+    </script>
+#{/set}

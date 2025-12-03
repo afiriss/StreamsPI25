@@ -62,3 +62,42 @@
          <p class="text-center mt-5">Nenhum filme encontrado no catálogo.</p>
     #{/if}
 </div>
+
+#{set 'moreScripts'}
+    <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Intercepta o clique em qualquer elemento com a classe .btn-add-cart
+            $('.btn-add-cart').click(function(e) {
+                // 1. Impede que o link abra a nova página
+                e.preventDefault();
+
+                // 2. Pega a URL do atributo href do botão clicado
+                var url = $(this).attr('href');
+                var botao = $(this); // Salva referência do botão para mudar texto/cor depois
+
+                // 3. Faz a requisição AJAX
+                $.ajax({
+                    type: 'POST', // ou 'GET', dependendo da sua rota, mas POST é ideal para ações
+                    url: url,
+                    success: function(resposta) {
+                        // 4. Executa isso se der certo
+                        // Você pode usar um alert simples ou algo mais elegante
+                        alert(resposta); 
+                        
+                        // Exemplo visual: Muda o texto do botão temporariamente
+                        var textoOriginal = botao.text();
+                        botao.text("Adicionado!").addClass("btn-success");
+                        setTimeout(function(){
+                            botao.text(textoOriginal).removeClass("btn-success");
+                        }, 2000);
+                    },
+                    error: function() {
+                        alert("Erro ao adicionar o filme. Verifique se você está logado.");
+                    }
+                });
+            });
+        });
+    </script>
+#{/set}
